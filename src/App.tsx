@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   //bSplit
-useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setBasicInventory(prev => {
         if (!checkStorage(prev))
@@ -56,24 +56,26 @@ useEffect(() => {
     }, chocolate.prodDur * 1000)
     return () => clearInterval(timer)
   }, [])
-
-  useEffect(()=>{
-    const timer = setTimeout(()=>{
-      const temp = Math.floor(Math.random()*storage*1.5)
+  
+  //selling
+  useEffect(() => {
+    const timer = setInterval(()=>{
+      const temp = Math.floor(Math.random() * storage * 1.5)
       const cust = makeCustomers(temp)
       console.log(cust.length, "customers were made")
-      for(let i =0;i<basicDesserts.length;i++){
+      for (let i = 0; i < basicDesserts.length; i++) {
         const type = basicDesserts[i].type
         const count = basicInventory[type]
-        const money = sellDessert(basicDesserts[i].type,cust,count).money
-        const bought = sellDessert(basicDesserts[i].type,cust,count).count
-        setMoney(prev=>prev+money)
-        setBasicInventory(prev=>({...prev,[type]:prev[type]-bought}))
+        const sold = sellDessert(basicDesserts[i].type, cust, count)
+        const money = sold.money
+        const bought = sold.count
+        setMoney(prev => prev + money)
+        setBasicInventory(prev => ({ ...prev, [type]: prev[type] - bought }))
         console.log("Bought an item")
       }
-    }, 12*Math.random()*1000)
-    return () => clearTimeout(timer)
-  },[])
+    }, 4000)
+    return ()=>clearInterval(timer)
+  }, [])
 
   return (
     <>
