@@ -12,7 +12,7 @@ function App() {
   const [money, setMoney] = useState(0)
   const [basicInventory, setBasicInventory] = useState<Record<dessertTypes, number>>({ bSplit: 0, iceCream: 0, chocolate: 0 })
   const [storage, setStorage] = useState(20)
-  const [shopLevel,setShopLevel] = useState(1)
+  //const [shopLevel,setShopLevel] = useState(1)
   const inv = (basicInventory.bSplit + basicInventory.iceCream + basicInventory.chocolate)
 
   function checkStorage(inventory: Record<dessertTypes, number>) {
@@ -62,12 +62,17 @@ useEffect(() => {
       const temp = Math.floor(Math.random()*storage*1.5)
       const cust = makeCustomers(temp)
       console.log(cust.length, "customers were made")
-      for(let i =1;i<basicDesserts.length;i++){
-        setMoney(prev=>prev+sellDessert(basicDesserts[i].type,cust,cust.length))
+      for(let i =0;i<basicDesserts.length;i++){
+        const type = basicDesserts[i].type
+        const count = basicInventory[type]
+        const money = sellDessert(basicDesserts[i].type,cust,count).money
+        const bought = sellDessert(basicDesserts[i].type,cust,count).count
+        setMoney(prev=>prev+money)
+        setBasicInventory(prev=>({...prev,[type]:prev[type]-bought}))
         console.log("Bought an item")
       }
     }, 12*Math.random()*1000)
-    return () => clearInterval(timer)
+    return () => clearTimeout(timer)
   },[])
 
   return (

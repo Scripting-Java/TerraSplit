@@ -23,6 +23,6 @@ export function sellDessert(type: dessertTypes, customerList: customer[], amount
         }
     }
     if (dessert)
-        return count * dessert.prodValue + tipCount * dessert.prodValue * 0.2
-    return 0
+        return {money:count * dessert.prodValue + tipCount * dessert.prodValue * 0.2, count:count}
+    return {money:0,count:0}
 }
