@@ -61,3 +61,5 @@ A 5% chance to earn 20% extra
 |Dessert|Time|Cost|
 |:--:|:--:|:--:|
 |Banana Split|3|7|
+|Ice Cream|2|15|
+|Chocolate|5|50|
