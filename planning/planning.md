@@ -55,3 +55,9 @@ A 5% chance to earn 20% extra
 - If you're production is full, you stop making goods.
 - You start w/ 20 storage slots(20 desserts)
 - Storage formula: 2X each level
+
+
+## Values(Planning)
+|Dessert|Time|Cost|
+|:--:|:--:|:--:|
+|Banana Split|3|7|
