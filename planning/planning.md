@@ -46,7 +46,7 @@ You can also buy more staff(bakers) to produce goods:
 
 
 ## Tipping:
-A 5% chance to earn 20% extra
+A random(& tbd) chance to earn 20% extra
 
 ## Storage:
 - Depending on your shop level you get storage.
