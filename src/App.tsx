@@ -21,32 +21,38 @@ function App() {
 
   //iceCream
   useEffect(() => {
-    if (checkStorage(prev)) {
-      const timer = setInterval(() => {
-        setBasicInventory(prev => ({ ...prev, iceCream: prev.iceCream + 1 }))
-      }, iceCream.prodDur * 1000)
-      return () => clearInterval(timer)
-    }
+    const timer = setInterval(() => {
+      setBasicInventory(prev => {
+        if (!checkStorage(prev))
+          return prev
+        return { ...prev, iceCream: prev.iceCream + 1 }
+      })
+    }, iceCream.prodDur * 1000)
+    return () => clearInterval(timer)
   }, [])
 
   //bSplit
-  useEffect(() => {
-    if (checkStorage()) {
-      const timer = setInterval(() => {
-        setBasicInventory(prev => ({ ...prev, bSplit: prev.bSplit + 1 }))
-      }, bSplit.prodDur * 1000)
-      return () => clearInterval(timer)
-    }
+useEffect(() => {
+    const timer = setInterval(() => {
+      setBasicInventory(prev => {
+        if (!checkStorage(prev))
+          return prev
+        return { ...prev, bSplit: prev.bSplit + 1 }
+      })
+    }, bSplit.prodDur * 1000)
+    return () => clearInterval(timer)
   }, [])
 
   //chocolate
   useEffect(() => {
-    if (checkStorage()) {
-      const timer = setInterval(() => {
-        setBasicInventory(prev => ({ ...prev, chocolate: prev.chocolate + 1 }))
-      }, chocolate.prodDur * 1000)
-      return () => clearInterval(timer)
-    }
+    const timer = setInterval(() => {
+      setBasicInventory(prev => {
+        if (!checkStorage(prev))
+          return prev
+        return { ...prev, chocolate: prev.chocolate + 1 }
+      })
+    }, chocolate.prodDur * 1000)
+    return () => clearInterval(timer)
   }, [])
 
   return (
