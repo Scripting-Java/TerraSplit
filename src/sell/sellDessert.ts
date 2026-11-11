@@ -1,28 +1,22 @@
 import type { dessertTypes } from "../desserts/dessert";
-import { type dessert, dessertMenu } from "../desserts/dessert";
+import { dessertMenu } from "../desserts/dessert";
 import type { customer } from "./customer";
 
 export function sellDessert(type: dessertTypes, customerList: customer[], amount: number) {
-    let dessert: dessert | undefined
+    const dessert = dessertMenu.find(temp => temp.type === type)
+    if (!dessert)
+        return { money: 0, count: 0 }
     let count = 0
     let tipCount = 0
-    for (const tempDessert of dessertMenu) {
-        if (tempDessert.type === type)
-            dessert = tempDessert
-    }
-    if (dessert != undefined) {
-        for (const cust of customerList) {
-            if (count >= amount)
-                break
-            const tip = Math.random()
-            if (cust.item.type === type) {
-                count++
-                if (cust.tippingChance > tip)
-                    tipCount++
-            }
+    for (const cust of customerList) {
+        const tip = Math.random()
+        if (count >= amount)
+            break
+        if (cust.item.type === type) {
+            count++
+            if (cust.tippingChance > tip)
+                tipCount++
         }
     }
-    if (dessert)
-        return {money:count * dessert.prodValue + tipCount * dessert.prodValue * 0.2, count:count}
-    return {money:0,count:0}
+    return { money: count * dessert.prodValue + tipCount * dessert.prodValue * 0.2, count: count }
 }
