@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { basicDesserts, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
@@ -14,6 +14,7 @@ function App() {
   const [storage, setStorage] = useState(20)
   //const [shopLevel,setShopLevel] = useState(1)
   const inv = (basicInventory.bSplit + basicInventory.iceCream + basicInventory.chocolate)
+  const invRef = useRef(basicInventory)
 
   function checkStorage(inventory: Record<dessertTypes, number>) {
     const total = inventory.bSplit + inventory.iceCream + inventory.chocolate
@@ -57,23 +58,29 @@ function App() {
     return () => clearInterval(timer)
   }, [])
   
+  //inventory
+  useEffect(()=>{
+    invRef.current=basicInventory
+  },[basicInventory])
+
+
   //selling
   useEffect(() => {
     const timer = setInterval(()=>{
-      const temp = Math.floor(Math.random() * storage * 1.5)
+      const temp = Math.floor(Math.random() * storage * 0.45 + 0.55*storage)
       const cust = makeCustomers(temp)
       console.log(cust.length, "customers were made")
       for (let i = 0; i < basicDesserts.length; i++) {
         const type = basicDesserts[i].type
-        const count = basicInventory[type]
+        const count = invRef.current[type]
         const sold = sellDessert(basicDesserts[i].type, cust, count)
         const money = sold.money
         const bought = sold.count
         setMoney(prev => prev + money)
         setBasicInventory(prev => ({ ...prev, [type]: prev[type] - bought }))
-        console.log("Bought an item")
+        console.log("Sold", bought, type, "for", money)
       }
-    }, 4000)
+    }, Math.floor(Math.random()*12+12)*1000)
     return ()=>clearInterval(timer)
   }, [])
 
@@ -86,18 +93,12 @@ function App() {
         Storage Filled: {inv}/{storage}
       </div>
       <div>
-        <button onClick={() => setBasicInventory({ ...basicInventory, iceCream: basicInventory.iceCream + 1 })}>
-          Add Ice Cream</button>
         <p>{basicInventory.iceCream} Ice Cream</p>
       </div>
       <div>
-        <button onClick={() => setBasicInventory({ ...basicInventory, bSplit: basicInventory.bSplit + 1 })}>
-          Add Banana Split</button>
         <p>{basicInventory.bSplit} Banana Split</p>
       </div>
       <div>
-        <button onClick={() => setBasicInventory({ ...basicInventory, chocolate: basicInventory.chocolate + 1 })}>
-          Add Ice Cream</button>
         <p>{basicInventory.chocolate} Chocolate</p>
       </div>
     </>
