@@ -1,12 +1,17 @@
-export type dessertTypes = "bSplit"|"iceCream"|"chocolate"
+export type dessertTypes = "bSplit"|"iceCream"|"chocolate"|"tart"|"pie"
 export interface dessert{
     type: dessertTypes,
     prodDur: number,
     prodValue: number,
+    tier: number,
 }
-
-import { bSplit } from "./bSplit"
-import { iceCream } from "./iceCream"
-import { chocolate } from "./chocolate"
-
+import { bSplit } from "./basic/bSplit"
+import { iceCream } from "./basic/iceCream"
+import { chocolate } from "./basic/chocolate"
 export const basicDesserts: dessert[] = [bSplit,iceCream,chocolate]
+
+import { tart } from "./mid/tart"
+import { pie } from "./mid/pie"
+export const midDesserts: dessert[] = [tart, pie]
+
+export const dessertMenu: dessert[] = [...basicDesserts,...midDesserts]

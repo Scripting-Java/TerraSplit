@@ -1,12 +1,12 @@
 import type { dessertTypes } from "../desserts/dessert";
-import { type dessert, basicDesserts } from "../desserts/dessert";
+import { type dessert, dessertMenu } from "../desserts/dessert";
 import type { customer } from "./customer";
 
 export function sellDessert(type: dessertTypes, customerList: customer[], amount: number) {
     let dessert: dessert | undefined
     let count = 0
     let tipCount = 0
-    for (const tempDessert of basicDesserts) {
+    for (const tempDessert of dessertMenu) {
         if (tempDessert.type === type)
             dessert = tempDessert
     }

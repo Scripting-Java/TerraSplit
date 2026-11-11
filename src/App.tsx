@@ -12,7 +12,7 @@ function App() {
   const [money, setMoney] = useState(0)
   const [basicInventory, setBasicInventory] = useState<Record<dessertTypes, number>>({ bSplit: 0, iceCream: 0, chocolate: 0 })
   const [storage, setStorage] = useState(20)
-  //const [shopLevel,setShopLevel] = useState(1)
+  const [shopLevel,setShopLevel] = useState(1)
   const inv = (basicInventory.bSplit + basicInventory.iceCream + basicInventory.chocolate)
   const invRef = useRef(basicInventory)
 
@@ -58,11 +58,10 @@ function App() {
     return () => clearInterval(timer)
   }, [])
   
-  //inventory
+  //inventory 
   useEffect(()=>{
     invRef.current=basicInventory
   },[basicInventory])
-
 
   //selling
   useEffect(() => {
@@ -86,9 +85,9 @@ function App() {
 
   return (
     <>
-      <div>
+      <h1>
         Money: {money}
-      </div>
+      </h1>
       <div>
         Storage Filled: {inv}/{storage}
       </div>

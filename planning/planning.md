@@ -63,3 +63,13 @@ A random(& tbd) chance to earn 20% extra
 |Banana Split|3|7|
 |Ice Cream|2|15|
 |Chocolate|5|50|
+|Tart|3|40|
+|Pie|5|90|
+
+
+### Todo:
+- Farms
+- Implement shop level progression 
+- Make visuals
+- Create shop frame
+- Finish sales logic
