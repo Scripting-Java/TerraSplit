@@ -108,6 +108,9 @@ function App() {
       <div>
         <p>{inventory.pie} Pie</p>
       </div>
+      <div>
+
+      </div>
     </>
   )
 }

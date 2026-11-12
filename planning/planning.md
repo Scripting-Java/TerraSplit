@@ -16,14 +16,9 @@ You can only make banana splits. Every 3 seconds, you make 1 banana split which 
 
 Those are just placeholder values
 
-As you accumulate money, you can upgrade your shop:
-- Bigger counter: +15% production speed
-- Table cloths: +10% chance for higher tier sales
-- Bigger windows: +5% tipping chance
-- Better Kitchen: +5% income
-
-These are infinitely upgradable, but get exponentially harder.
-After unlocking each one(as in one bigger counter, one table cloth, one bigger windows, and one better kitchen), your shop level goes up.
+CHANGED THIS ENTIRE SECTION TO FARM UPGRADES.
+### Level:
+TO LEVEL UP, NOW YOU MUST UNLOCK ALL UPGRADES FOR BUSINESSES IN PREVIOUS LEVELS, AND THEN ALSO SERVE A CERTAIN CUSTOMER THRESHOLD
 When your shop level goes up, you're storage shows up. Upgrades are exponential.
 
 
@@ -36,6 +31,10 @@ You can also upgrade your farms:
 - Tractors = +10% production speed
 - Refinement = +2.5% income
 - Organic = +5% tipping chance
+
+
+### Chefs:
+To produce more than one dessert at a time, you get more chefs not farms.
 
 
 ### Farms:
@@ -72,4 +71,12 @@ A random(& tbd) chance to earn 20% extra
 - Implement shop level progression 
 - Make visuals
 - Create shop frame
-- Finish sales logic
+- Finish sales logic[X]
+
+
+### Farm notes:
+"banana" = bananaSplit
+"dairy" = iceCream
+"cocoa" = chocolate
+"fruit" = tart
+"flour mill" = pie
