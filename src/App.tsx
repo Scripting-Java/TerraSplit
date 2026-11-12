@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { basicDesserts, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
-import { iceCream } from './desserts/iceCream'
-import { bSplit } from './desserts/bSplit'
-import { chocolate } from './desserts/chocolate'
+import { iceCream } from './desserts/basic/iceCream'
+import { bSplit } from './desserts/basic/bSplit'
+import { chocolate } from './desserts/basic/chocolate'
 import { sellDessert } from './sell/sellDessert'
 
 
@@ -67,7 +67,7 @@ function App() {
   useEffect(() => {
     const timer = setInterval(()=>{
       const temp = Math.floor(Math.random() * storage * 0.45 + 0.55*storage)
-      const cust = makeCustomers(temp)
+      const cust = makeCustomers(temp, shopLevel)
       console.log(cust.length, "customers were made")
       for (let i = 0; i < basicDesserts.length; i++) {
         const type = basicDesserts[i].type
