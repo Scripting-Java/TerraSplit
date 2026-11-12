@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { basicDesserts, dessertMenu, type dessertTypes } from './desserts/dessert'
+import {dessertMenu, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
 import { sellDessert } from './sell/sellDessert'
@@ -60,22 +60,29 @@ function App() {
 
   //selling
   useEffect(() => {
-    const timer = setInterval(() => {
+    let timer: number
+    function custCycle() {
       const temp = Math.floor(Math.random() * storage * 0.45 + 0.55 * storage)
       const cust = makeCustomers(temp, shopLevel)
+
       console.log(cust.length, "customers were made")
+
       for (let i = 0; i < dessertMenu.length; i++) {
         const type = dessertMenu[i].type
         const count = invRef.current[type]
-        const sold = sellDessert(basicDesserts[i].type, cust, count)
+        const sold = sellDessert(dessertMenu[i].type, cust, count)
         const money = sold.money
         const bought = sold.count
         setMoney(prev => prev + money)
         setInventory(prev => ({ ...prev, [type]: prev[type] - bought }))
         console.log("Sold", bought, type, "for", money)
       }
-    }, Math.floor(Math.random() * 12 + 12) * 1000)
-    return () => clearInterval(timer)
+
+      const delay = Math.floor(Math.random() * 13 + 12) * 1000
+      timer = setTimeout(custCycle, delay)
+    }
+    timer = setTimeout(custCycle,Math.floor(Math.random() * 13 + 12) * 1000)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -94,6 +101,12 @@ function App() {
       </div>
       <div>
         <p>{inventory.chocolate} Chocolate</p>
+      </div>
+      <div>
+        <p>{inventory.tart} Tart</p>
+      </div>
+      <div>
+        <p>{inventory.pie} Pie</p>
       </div>
     </>
   )
