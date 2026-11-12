@@ -1,86 +1,81 @@
 import { useState, useEffect, useRef } from 'react'
-import { basicDesserts, type dessertTypes } from './desserts/dessert'
+import { basicDesserts, dessertMenu, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
-import { iceCream } from './desserts/basic/iceCream'
-import { bSplit } from './desserts/basic/bSplit'
-import { chocolate } from './desserts/basic/chocolate'
 import { sellDessert } from './sell/sellDessert'
 
 
 function App() {
   const [money, setMoney] = useState(0)
-  const [basicInventory, setBasicInventory] = useState<Record<dessertTypes, number>>({ bSplit: 0, iceCream: 0, chocolate: 0 })
+  const invInit: Record<dessertTypes, number> = {
+    bSplit: 0,
+    iceCream: 0,
+    chocolate: 0,
+    tart: 0,
+    pie: 0
+  }
+  const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)
-  const [shopLevel,setShopLevel] = useState(1)
-  const inv = (basicInventory.bSplit + basicInventory.iceCream + basicInventory.chocolate)
-  const invRef = useRef(basicInventory)
+  const [shopLevel, setShopLevel] = useState(1)
+
+  function invCount(inventory: Record<dessertTypes, number>): number {
+    let temp = 0
+    for (const dessert of dessertMenu) {
+      temp += inventory[dessert.type]
+    }
+    return temp
+  }
+
+
+  const invRef = useRef(inventory)
 
   function checkStorage(inventory: Record<dessertTypes, number>) {
-    const total = inventory.bSplit + inventory.iceCream + inventory.chocolate
+    const total = invCount(inventory)
     return total < storage
   }
 
 
-  //iceCream
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setBasicInventory(prev => {
-        if (!checkStorage(prev))
-          return prev
-        return { ...prev, iceCream: prev.iceCream + 1 }
-      })
-    }, iceCream.prodDur * 1000)
-    return () => clearInterval(timer)
+    const timers = dessertMenu.map(dessert => {
+      return setInterval(() => {
+        setInventory(prev => {
+          if (!checkStorage(prev))
+            return prev
+          return { ...prev, [dessert.type]: prev[dessert.type] + 1 }
+        })
+      }, dessert.prodDur * 1000)
+    })
+    return () => {
+      for (let i = 0; i < timers.length; i++) {
+        (clearInterval(timers[i]))
+      }
+    }
   }, [])
 
-  //bSplit
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setBasicInventory(prev => {
-        if (!checkStorage(prev))
-          return prev
-        return { ...prev, bSplit: prev.bSplit + 1 }
-      })
-    }, bSplit.prodDur * 1000)
-    return () => clearInterval(timer)
-  }, [])
-
-  //chocolate
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setBasicInventory(prev => {
-        if (!checkStorage(prev))
-          return prev
-        return { ...prev, chocolate: prev.chocolate + 1 }
-      })
-    }, chocolate.prodDur * 1000)
-    return () => clearInterval(timer)
-  }, [])
-  
   //inventory 
-  useEffect(()=>{
-    invRef.current=basicInventory
-  },[basicInventory])
+  useEffect(() => {
+    invRef.current = inventory
+  }, [inventory])
 
   //selling
   useEffect(() => {
-    const timer = setInterval(()=>{
-      const temp = Math.floor(Math.random() * storage * 0.45 + 0.55*storage)
+    const timer = setInterval(() => {
+      const temp = Math.floor(Math.random() * storage * 0.45 + 0.55 * storage)
       const cust = makeCustomers(temp, shopLevel)
       console.log(cust.length, "customers were made")
-      for (let i = 0; i < basicDesserts.length; i++) {
-        const type = basicDesserts[i].type
+      for (let i = 0; i < dessertMenu.length; i++) {
+        const type = dessertMenu[i].type
         const count = invRef.current[type]
         const sold = sellDessert(basicDesserts[i].type, cust, count)
         const money = sold.money
         const bought = sold.count
         setMoney(prev => prev + money)
-        setBasicInventory(prev => ({ ...prev, [type]: prev[type] - bought }))
+        setInventory(prev => ({ ...prev, [type]: prev[type] - bought }))
         console.log("Sold", bought, type, "for", money)
       }
-    }, Math.floor(Math.random()*12+12)*1000)
-    return ()=>clearInterval(timer)
+    }, Math.floor(Math.random() * 12 + 12) * 1000)
+    return () => clearInterval(timer)
   }, [])
 
   return (
@@ -89,16 +84,16 @@ function App() {
         Money: {money}
       </h1>
       <div>
-        Storage Filled: {inv}/{storage}
+        Storage Filled: {invCount(inventory)}/{storage}
       </div>
       <div>
-        <p>{basicInventory.iceCream} Ice Cream</p>
+        <p>{inventory.iceCream} Ice Cream</p>
       </div>
       <div>
-        <p>{basicInventory.bSplit} Banana Split</p>
+        <p>{inventory.bSplit} Banana Split</p>
       </div>
       <div>
-        <p>{basicInventory.chocolate} Chocolate</p>
+        <p>{inventory.chocolate} Chocolate</p>
       </div>
     </>
   )
