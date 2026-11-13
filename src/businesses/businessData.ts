@@ -68,4 +68,5 @@ export const pieStore:business = {
 }
 
 export const businesses: business[] = [bSplitShop, iceCream, chocolate, tartShop, pieStore]
-
+const names: string[] = businesses.map(bus=>bus.name)
+export type businessNames = typeof names[number]

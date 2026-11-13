@@ -3,6 +3,7 @@ import {dessertMenu, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
 import { sellDessert } from './sell/sellDessert'
+import { businesses } from './businesses/businessData'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)
   const [shopLevel, setShopLevel] = useState(1)
+  const [shops, setShops] = useState(businesses)
 
   function invCount(inventory: Record<dessertTypes, number>): number {
     let temp = 0
