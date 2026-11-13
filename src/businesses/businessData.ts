@@ -1,5 +1,5 @@
 import { type dessertTypes } from "../desserts/dessert"
-import { bananaFarm, cocoaFarm, dairyFarm, flourMill, fruitFarm, type farm } from "../farm"
+import { bananaFarm, cocoaFarm, dairyFarm, flourMill, fruitFarm, type farm } from "../farms/farm"
 
 export interface business {
     name: string,

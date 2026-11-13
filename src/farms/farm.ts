@@ -1,5 +1,3 @@
-import type { dessertTypes } from "../desserts/dessert"
-
 export interface upgrade {
     name: string,
     cost: number,
