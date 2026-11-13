@@ -5,7 +5,8 @@ import './App.css'
 import { sellDessert } from './sell/sellDessert'
 import { businesses, type businessNames } from './businesses/businessData'
 import { unlockBusiness,purchaseBusiness,getAvailableBusinesses } from './businesses/business'
-
+import { FarmCard } from './farms/FarmCard'
+import { moneyFormat } from './utils/formatter'
 function App() {
   const [money, setMoney] = useState(0)
   const invInit: Record<dessertTypes, number> = {
@@ -102,28 +103,15 @@ function App() {
   return (
     <>
       <h1>
-        Money: {money}
+        Money: {moneyFormat(money)}
       </h1>
       <div>
         Storage Filled: {invCount(inventory)}/{storage}
       </div>
       <div>
-        <p>{inventory.iceCream} Ice Cream</p>
-      </div>
-      <div>
-        <p>{inventory.bSplit} Banana Split</p>
-      </div>
-      <div>
-        <p>{inventory.chocolate} Chocolate</p>
-      </div>
-      <div>
-        <p>{inventory.tart} Tart</p>
-      </div>
-      <div>
-        <p>{inventory.pie} Pie</p>
-      </div>
-      <div>
-
+        {shops.map(shop=>(
+          <FarmCard key={shop.name} farm={shop.farm}></FarmCard>
+        ))}
       </div>
     </>
   )

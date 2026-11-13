@@ -20,21 +20,21 @@ export const bananaFarm: farm = {
     type: "banana",
     upgrades: [
         {
-            name: "tractors",
+            name: "Tractors",
             cost: 50,
             purchased: false,
             desc: "Harvest Your Bananas 20% Faster, Make Your Desserts 20% Faster",
             prodSpeed: 1.2,
         },
         {
-            name: "refinement",
+            name: "Quality Control",
             cost: 70,
             purchased: false,
             desc: "Extra Radioactive Bananas. Sell Your Splits For 5% Extra.",
             income: 1.05
         },
         {
-            name: "organic",
+            name: "Organic",
             cost: 150,
             purchased: false,
             desc: "Organic Crops Give You A 5% Extra Tip Chance.",
@@ -48,28 +48,28 @@ export const dairyFarm: farm = {
     type: "dairy",
     upgrades: [
         {
-            name: "feed",
+            name: "Better Feed",
             cost: 50,
             purchased: false,
             desc: "Better Feed = Better Milk = 10% More Expensive Ice Cream",
             income: 1.1,
         },
         {
-            name: "milkTower",
+            name: "Milk Silo",
             cost: 70,
             purchased: false,
             desc: "Creamed Milk On Demand. 5% Better Income",
             income: 1.05
         },
         {
-            name: "premium",
+            name: "Premium Cows",
             cost: 150,
             purchased: false,
             desc: "Grade A Milk Gives You A 5% Extra Tip Chance.",
             organic: 1.05
         },
         {
-            name: "automation",
+            name: "Robots",
             cost: 220,
             purchased: false,
             desc: "Automated Milk Production. 20% Faster Ice Cream Production.",
@@ -83,28 +83,28 @@ export const cocoaFarm: farm = {
     type: "cocoa",
     upgrades: [
         {
-            name: "soil",
+            name: "Better Soil",
             cost: 500,
             purchased: false,
             desc: "Better Soil To Grow Crops On. 10% extra income",
             income: 1.1,
         },
         {
-            name: "cocoaProcessing",
+            name: "Processing",
             cost: 700,
             purchased: false,
             desc: "Process Your Cocoa On Site for 10% fast produciton",
             prodSpeed: 1.1
         },
         {
-            name: "organic",
+            name: "No Pesticides",
             cost: 1150,
             purchased: false,
             desc: "Organic Cocoa Beans Give You A 8% Extra Tipping Chance.",
             organic: 1.08
         },
         {
-            name: "harvesters",
+            name: "Harvesters",
             cost: 2220,
             purchased: false,
             desc: "Massive Machines Which Harvest Cocoa 20% Faster.",
@@ -118,35 +118,35 @@ export const fruitFarm: farm = {
     type: "fruit",
     upgrades: [
         {
-            name: "soil",
+            name: "Better Soil",
             cost: 15000,
             purchased: false,
             desc: "Better Soil To Grow Crops On. 10% extra income",
             income: 1.1,
         },
         {
-            name: "moreSunlight",
+            name: "More Sunlight",
             cost: 17000,
             purchased: false,
             desc: "More Sunlight Makes Your Crops Grow 15% Faster",
             prodSpeed: 1.15
         },
         {
-            name: "organic",
+            name: "Organic",
             cost: 21150,
             purchased: false,
             desc: "Organic Fruit Gives You A 15% Extra Tipping Chance.",
             organic: 1.15
         },
         {
-            name: "harvesters",
+            name: "Harvesters",
             cost: 25550,
             purchased: false,
             desc: "Massive Machines Which Harvest Fruits 20% Faster.",
             prodSpeed: 1.2
         },
         {
-            name: "irrigation",
+            name: "Irrigation",
             cost: 30000,
             purchased: false,
             desc: "Irrigation Systems To Grow Fruits 25% Faster",
@@ -160,42 +160,42 @@ export const flourMill: farm = {
     type: "flourMill",
     upgrades: [
         {
-            name: "betterGrain",
+            name: "Better Seeds",
             cost: 150000,
             purchased: false,
             desc: "Better Grain Seeds. 8% extra income",
             income: 1.08,
         },
         {
-            name: "moreSunlight",
+            name: "Less Shade",
             cost: 170000,
             purchased: false,
             desc: "More Sunlight Makes Your Crops Grow 15% Faster",
             prodSpeed: 1.15
         },
         {
-            name: "organic",
+            name: "No Pesticides",
             cost: 210150,
             purchased: false,
             desc: "Organic Wheat Gives You A 15% Extra Tipping Chance.",
             organic: 1.15
         },
         {
-            name: "harvesters",
+            name: "Harvesters",
             cost: 255550,
             purchased: false,
             desc: "Massive Machines Which Harvest Wheat 20% Faster.",
             prodSpeed: 1.2
         },
         {
-            name: "irrigation",
+            name: "Irrigation",
             cost: 300000,
             purchased: false,
-            desc: "Irrigation Systems To Grow Wheat 50% Faster",
-            prodSpeed: 1.5
+            desc: "Irrigation Systems To Grow Wheat 25% Faster",
+            prodSpeed: 1.25
         },
         {
-            name: "refinement",
+            name: "Milling",
             cost: 500000,
             purchased: false,
             desc: "Refine Your Wheat For A 20% Extra Tipping Chance & 15% Extra Income At The Expense of 7.5% Slower Production",
