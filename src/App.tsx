@@ -3,8 +3,8 @@ import {dessertMenu, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
 import { sellDessert } from './sell/sellDessert'
-import { businesses } from './businesses/businessData'
-
+import { businesses, type businessNames } from './businesses/businessData'
+import { unlockBusiness,purchaseBusiness,getAvailableBusinesses } from './businesses/business'
 
 function App() {
   const [money, setMoney] = useState(0)
@@ -28,16 +28,13 @@ function App() {
     return temp
   }
 
-
   const invRef = useRef(inventory)
-
   function checkStorage(inventory: Record<dessertTypes, number>) {
     const total = invCount(inventory)
     return total < storage
   }
 
-
-
+  //production
   useEffect(() => {
     const timers = dessertMenu.map(dessert => {
       return setInterval(() => {
@@ -86,6 +83,21 @@ function App() {
     timer = setTimeout(custCycle,Math.floor(Math.random() * 13 + 12) * 1000)
     return () => clearTimeout(timer)
   }, [])
+
+  function handleBusinessUnlock(business:businessNames){
+    const result = unlockBusiness(business,shops,money,shopLevel)
+    setMoney(result.money)
+    setShops(result.businesses)
+  }
+  
+  function handleBusinessPurchase(business:businessNames){
+    const result = purchaseBusiness(business,shops,money,shopLevel)
+    setMoney(result.money)
+    setShops(result.businesses)
+  }
+  function findBusinesses(){
+    const unlocks = getAvailableBusinesses(shops)
+  }
 
   return (
     <>
