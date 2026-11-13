@@ -44,3 +44,13 @@
     border-radius: 10px;
     padding:5px;
 }
+.upgradeButton{
+    border-radius: 10px;
+    background-color: #da2626;
+    border: 2px solid #961b1b;
+}
+.upgradeButton:disabled{
+    border-radius: 10px;
+    background-color: #470e0e;
+    border: 2px solid #380b0b;
+}

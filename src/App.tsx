@@ -7,6 +7,7 @@ import { businesses, type businessNames } from './businesses/businessData'
 import { unlockBusiness,purchaseBusiness,getAvailableBusinesses } from './businesses/business'
 import { FarmCard } from './farms/FarmCard'
 import { moneyFormat } from './utils/formatter'
+import { purchaseFarmUpgrade, type farmTypes } from './farms/farm'
 function App() {
   const [money, setMoney] = useState(0)
   const invInit: Record<dessertTypes, number> = {
@@ -96,10 +97,16 @@ function App() {
     setMoney(result.money)
     setShops(result.businesses)
   }
+
   function findBusinesses(){
     const unlocks = getAvailableBusinesses(shops)
   }
 
+  function handleUpgrade(farm:farmTypes,upgrade:string){
+    const result = purchaseFarmUpgrade(farm,upgrade,shops,money)
+    setShops(result.businesses)
+    setMoney(result.money)
+  }
   return (
     <>
       <h1>
@@ -110,7 +117,7 @@ function App() {
       </div>
       <div>
         {shops.map(shop=>(
-          <FarmCard key={shop.name} farm={shop.farm}></FarmCard>
+          <FarmCard key={shop.name} farm={shop.farm} handlePurchase={handleUpgrade}></FarmCard>
         ))}
       </div>
     </>

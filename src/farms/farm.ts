@@ -1,3 +1,5 @@
+import type { business } from "../businesses/businessData"
+
 export interface upgrade {
     name: string,
     cost: number,
@@ -204,4 +206,25 @@ export const flourMill: farm = {
             prodSpeed: 0.925
         }
     ]
+}
+
+
+export function purchaseFarmUpgrade(farmType: farmTypes, upgradeName: string, businesses: business[], money: number) {
+    const farms = businesses.map(bus => bus.farm)
+    const i = businesses.findIndex(bus => bus.farm.type === farmType)
+    const farm = farms.find(temp => temp.type === farmType)
+    if (!farm)
+        return { businesses: businesses, money: money }
+    const upgrade = farm.upgrades.find(temp => temp.name === upgradeName)
+    if (!upgrade || upgrade.cost > money || upgrade.purchased)
+        return { businesses: businesses, money: money }
+    return {
+        businesses: businesses.map((bus, index) => {
+            if (index !== i)
+                return bus
+            return {
+                 ...bus, 
+                 farm: { ...bus.farm, upgrades: bus.farm.upgrades.map(temp => temp.name === upgradeName ? { ...temp , purchased:true} : temp) } }
+        }), money: money - upgrade.cost
+    }
 }

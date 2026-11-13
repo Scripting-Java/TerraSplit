@@ -4,7 +4,8 @@ import wheat from "../assets/farmIcons/WheatFarm.png"
 import banana from "../assets/farmIcons/BananaFarm.png"
 import "./FarmCards.css"
 interface FarmCard {
-    farm: farm
+    farm: farm,
+    handlePurchase:(farmType:farmTypes,upgrade:string)=>void,
 }
 
 function makeFarmTypeNames(farmType: farmTypes): string {
@@ -48,9 +49,9 @@ function chooseImg(farmType:farmTypes){
     return ""
 }
 
-export function FarmCard({ farm }: FarmCard) {
+export function FarmCard({ farm, handlePurchase }: FarmCard) {
     return (
-        <div className="farm">
+           <div className="farm">
             <details className="farmDets">
                 <summary className="farmSum">
                     <div>
@@ -69,6 +70,9 @@ export function FarmCard({ farm }: FarmCard) {
                                 <p>{upgrade.desc}</p>
                                 <p>{moneyFormat(upgrade.cost)}</p>
                                 <p>{upgrade.purchased ? "Purchased" : "Not Purchased"}</p>
+                                <button disabled={upgrade.purchased} className="upgradeButton"onClick={()=>handlePurchase(farm.type,upgrade.name)}>
+                                    {upgrade.purchased?"Purchased":"Purchase"}
+                                </button>
                             </details>
                         </div>
                     ))}
