@@ -228,3 +228,21 @@ export function purchaseFarmUpgrade(farmType: farmTypes, upgradeName: string, bu
         }), money: money - upgrade.cost
     }
 }
+
+export function getFarmMultipliers(farm:farm){
+    let prodSpeed = 1
+    let income = 1
+    let organic = 1
+    const upgrades = farm.upgrades
+    for(const upgrade of upgrades){
+        if(upgrade.purchased){
+            if(upgrade.prodSpeed)
+                prodSpeed/=upgrade.prodSpeed
+            if(upgrade.income)
+                income*=upgrade.income
+            if(upgrade.organic)
+                organic+=upgrade.organic-1
+        }
+    }
+    return {prod:prodSpeed,inc:income,org:organic}
+}

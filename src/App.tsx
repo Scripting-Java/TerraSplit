@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
-import {dessertMenu, type dessertTypes } from './desserts/dessert'
+import { dessertMenu, type dessertTypes } from './desserts/dessert'
 import { makeCustomers } from './sell/customer'
 import './App.css'
 import { sellDessert } from './sell/sellDessert'
 import { businesses, type businessNames } from './businesses/businessData'
-import { unlockBusiness,purchaseBusiness,getAvailableBusinesses } from './businesses/business'
+import { unlockBusiness, purchaseBusiness, getAvailableBusinesses } from './businesses/business'
 import { FarmCard } from './farms/FarmCard'
 import { moneyFormat } from './utils/formatter'
-import { purchaseFarmUpgrade, type farmTypes } from './farms/farm'
+import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms/farm'
 function App() {
   const [money, setMoney] = useState(0)
   const invInit: Record<dessertTypes, number> = {
@@ -39,20 +39,26 @@ function App() {
   //production
   useEffect(() => {
     const timers = dessertMenu.map(dessert => {
+      const shop = shops.find(bus => bus.dessert === dessert.type)
+      let mult
+      if (shop)
+        mult = getFarmMultipliers(shop.farm)
+      else
+        mult = { prod: 1, inc: 1, org: 1 }
       return setInterval(() => {
         setInventory(prev => {
           if (!checkStorage(prev))
             return prev
           return { ...prev, [dessert.type]: prev[dessert.type] + 1 }
         })
-      }, dessert.prodDur * 1000)
+      }, dessert.prodDur * 1000 * mult.prod)
     })
     return () => {
       for (let i = 0; i < timers.length; i++) {
         (clearInterval(timers[i]))
       }
     }
-  }, [])
+  }, [shops])
 
   //inventory 
   useEffect(() => {
@@ -71,7 +77,13 @@ function App() {
       for (let i = 0; i < dessertMenu.length; i++) {
         const type = dessertMenu[i].type
         const count = invRef.current[type]
-        const sold = sellDessert(dessertMenu[i].type, cust, count)
+        const shop = shops.find(bus => bus.dessert === type)
+        let mult
+        if (shop)
+          mult = getFarmMultipliers(shop.farm)
+        else
+          mult = { prod: 1, inc: 1, org: 1 }
+        const sold = sellDessert(dessertMenu[i].type, cust, count, mult.inc, mult.org-1)
         const money = sold.money
         const bought = sold.count
         setMoney(prev => prev + money)
@@ -82,28 +94,28 @@ function App() {
       const delay = Math.floor(Math.random() * 13 + 12) * 1000
       timer = setTimeout(custCycle, delay)
     }
-    timer = setTimeout(custCycle,Math.floor(Math.random() * 13 + 12) * 1000)
+    timer = setTimeout(custCycle, Math.floor(Math.random() * 13 + 12) * 1000)
     return () => clearTimeout(timer)
-  }, [])
+  }, [shops, storage, shopLevel])
 
-  function handleBusinessUnlock(business:businessNames){
-    const result = unlockBusiness(business,shops,money,shopLevel)
-    setMoney(result.money)
-    setShops(result.businesses)
-  }
-  
-  function handleBusinessPurchase(business:businessNames){
-    const result = purchaseBusiness(business,shops,money,shopLevel)
+  function handleBusinessUnlock(business: businessNames) {
+    const result = unlockBusiness(business, shops, money, shopLevel)
     setMoney(result.money)
     setShops(result.businesses)
   }
 
-  function findBusinesses(){
+  function handleBusinessPurchase(business: businessNames) {
+    const result = purchaseBusiness(business, shops, money, shopLevel)
+    setMoney(result.money)
+    setShops(result.businesses)
+  }
+
+  function findBusinesses() {
     const unlocks = getAvailableBusinesses(shops)
   }
 
-  function handleUpgrade(farm:farmTypes,upgrade:string){
-    const result = purchaseFarmUpgrade(farm,upgrade,shops,money)
+  function handleUpgrade(farm: farmTypes, upgrade: string) {
+    const result = purchaseFarmUpgrade(farm, upgrade, shops, money)
     setShops(result.businesses)
     setMoney(result.money)
   }
@@ -116,7 +128,7 @@ function App() {
         Storage Filled: {invCount(inventory)}/{storage}
       </div>
       <div>
-        {shops.map(shop=>(
+        {shops.map(shop => (
           <FarmCard key={shop.name} farm={shop.farm} handlePurchase={handleUpgrade}></FarmCard>
         ))}
       </div>
