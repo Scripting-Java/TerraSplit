@@ -67,11 +67,10 @@ A random(& tbd) chance to earn 20% extra
 
 
 ### Todo:
-- Farms
-- Implement shop level progression 
+- Farms[X]
+- Implement shop level progression -> Based on #Customers Served+ Money 
 - Make visuals
 - Create shop frame
-- Finish sales logic[X]
 
 
 ### Farm notes:
