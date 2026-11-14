@@ -9,7 +9,7 @@ export interface upgrade {
     income?: number,
     organic?: number
 }
-export type farmTypes = "banana" | "dairy" | "cocoa" | "fruit" | "flourMill"|"sugarFarm"
+export type farmTypes = "banana" | "dairy" | "cocoa" | "fruit" | "flourMill"|"sugarFarm"|"cheese"|"pistachio"
 
 export interface farm {
     name: string,
@@ -258,6 +258,109 @@ export const sugarFarm: farm = {
         }
     ]
 }
+
+export const cheeseFarm: farm = {
+    name: "cheeseFarm",
+    type: "cheese",
+    upgrades: [
+        {
+            name: "Cheddar",
+            cost: 1050000,
+            purchased: false,
+            desc: "Cheddar Cheese. 20% Extra Income",
+            income: 1.2,
+        },
+        {
+            name: "American",
+            cost: 5000000,
+            purchased: false,
+            desc: "American Cheese. 40% Extra Income",
+            income: 1.4,
+        },
+        {
+            name: "Swiss",
+            cost: 10000000,
+            purchased: false,
+            desc: "Swiss Cheese. 80% Extra Income",
+            income:1.8
+        },
+        {
+            name: "Better Milk",
+            cost: 50000000,
+            purchased: false,
+            desc: "Better Milk Which Gives A 30% Higher Tipping Chance.",
+            organic: 1.3
+        },
+        {
+            name: "CheeseMaker",
+            cost: 75000000,
+            purchased: false,
+            desc: "Cheese Making Factories To Make Cheese 25% Faster",
+            prodSpeed: 1.25
+        },
+        {
+            name: "NY Cheesecake",
+            cost: 100000000,
+            purchased: false,
+            desc: "Double Your Income, Speed, And Add 50% To Your Tipping Chance",
+            organic: 1.50,
+            income: 2,
+            prodSpeed: 2
+        }
+    ]
+}
+
+export const pistachioFarm: farm = {
+    name: "pistachioFarm",
+    type: "pistachio",
+    upgrades: [
+        {
+            name: "Better Seeds",
+            cost: 10000000,
+            purchased: false,
+            desc: "Better Pistachio Seeds Give You 20% Extra Income",
+            income: 1.2,
+        },
+        {
+            name: "Crunchy",
+            cost: 50000000,
+            purchased: false,
+            desc: "Extra Cruncy Pistachios. 40% Extra Income",
+            income: 1.4,
+        },
+        {
+            name: "Irrigation",
+            cost: 100000000,
+            purchased: false,
+            desc: "Water Your Pistachios More So They Grow 25% Faster",
+            prodSpeed:1.25
+        },
+        {
+            name: "Quality Control",
+            cost: 500000000,
+            purchased: false,
+            desc: "Better Pistachios Give You A 30% Higher Tipping Chance.",
+            organic: 1.3
+        },
+        {
+            name: "Processing",
+            cost: 750000000,
+            purchased: false,
+            desc: "Deshell Your Pistachios To Make Your Desserts 40% Faster",
+            prodSpeed: 1.4
+        },
+        {
+            name: "Extra Layers",
+            cost: 1000000000,
+            purchased: false,
+            desc: "Triple Your Income, Speed, And Add 75% To Your Tipping Chance",
+            organic: 1.75,
+            income: 3,
+            prodSpeed: 3
+        }
+    ]
+}
+
 
 
 export function purchaseFarmUpgrade(farmType: farmTypes, upgradeName: string, businesses: business[], money: number) {

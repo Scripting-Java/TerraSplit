@@ -1,4 +1,4 @@
-export type dessertTypes = "bSplit"|"iceCream"|"chocolate"|"tart"|"pie"|"cake"
+export type dessertTypes = "bSplit"|"iceCream"|"chocolate"|"tart"|"pie"|"cake"|"cheesecake"|"baklava"
 export interface dessert{
     type: dessertTypes,
     prodDur: number,
@@ -15,4 +15,8 @@ import { pie } from "./mid/pie"
 import { cake } from "./mid/cake"
 export const midDesserts: dessert[] = [tart, pie, cake]
 
-export const dessertMenu: dessert[] = [...basicDesserts,...midDesserts]
+import { cheesecake } from "./good/cheesecake"
+import { baklava } from "./good/baklava"
+export const goodDesserts: dessert[] = [cheesecake,baklava]
+
+export const dessertMenu: dessert[] = [...basicDesserts,...midDesserts, ...goodDesserts]

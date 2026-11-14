@@ -18,7 +18,9 @@ function App() {
     chocolate: 0,
     tart: 0,
     pie: 0,
-    cake: 0
+    cake: 0,
+    cheesecake:0,
+    baklava:0
   }
   const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)

@@ -77,6 +77,9 @@ A random chance to earn 20% extra
 "cocoa" = chocolate
 "fruit" = tart
 "flour mill" = pie
+"cheese" = cheesecake
+"pistachio" = baklava
+
 
 ### Adding new business/dessert:
 1. Create dessert under folder in desserts(make it like dessert.ts Ex: cake.ts). Copy paste any existing dessert

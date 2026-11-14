@@ -1,5 +1,5 @@
 import { type dessertTypes } from "../desserts/dessert"
-import { bananaFarm, cocoaFarm, dairyFarm, flourMill, fruitFarm, sugarFarm, type farm } from "../farms/farm"
+import { bananaFarm, cheeseFarm, cocoaFarm, dairyFarm, flourMill, fruitFarm, pistachioFarm, sugarFarm, type farm } from "../farms/farm"
 
 export interface business {
     name: string,
@@ -78,6 +78,28 @@ export const cakeShop: business = {
     purchased: false
 }
 
-export const businesses: business[] = [bSplitShop, iceCream, chocolate, tartShop, pieStore, cakeShop]
+export const cheesecakeShop:business = {
+     name: "Cheesecake Shop",
+    dessert: "cheesecake",
+    cost: 10000000,
+    unlockCost: 125000000,
+    levelReq: 6,
+    unlocked: false,
+    farm: cheeseFarm,
+    purchased: false
+}
+
+export const baklavaShop:business = {
+     name: "Baklava Bakery",
+    dessert: "baklava",
+    cost: 250000000,
+    unlockCost: 1500000000,
+    levelReq: 7,
+    unlocked: false,
+    farm: pistachioFarm,
+    purchased: false
+}
+
+export const businesses: business[] = [bSplitShop, iceCream, chocolate, tartShop, pieStore, cakeShop, cheesecakeShop, baklavaShop]
 const names: string[] = businesses.map(bus => bus.name)
 export type businessNames = typeof names[number]

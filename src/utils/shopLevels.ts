@@ -11,4 +11,6 @@ export const reqs:shopLevelReq[] = [
     {level:3,customers:1500,farmType:"cocoa"},
     {level:4,customers:3750,farmType:"fruit"},
     {level:5,customers:10000,farmType:"flourMill"},
+    {level:6,customers:50000,farmType:"cheese"},
+    {level:7,customers:100000,farmType:"pistachio"}
 ]

@@ -6,11 +6,16 @@ export interface customer {
 }
 
 function getCustomerItem(want: number): dessert {
-    if (want < 0.6) {
-        return dessertMenu.filter(temp => temp.tier === 0)[Math.floor(Math.random() * dessertMenu.filter(temp => temp.tier === 0).length)]
-    } else if (want < 0.85) {
-        return dessertMenu.filter(temp => temp.tier === 0)[Math.floor(Math.random() * dessertMenu.filter(temp => temp.tier === 1).length)]
-    } else
+    const basic = dessertMenu.filter(temp => temp.tier === 0)
+    const mid = dessertMenu.filter(temp => temp.tier === 1)
+    const good = dessertMenu.filter(temp=>temp.tier==2)
+    if (want < 0.6)
+        return basic[Math.floor(Math.random() * basic.length)]
+    else if (want < 0.85)
+        return mid[Math.floor(Math.random() * mid.length)]
+    else if(want<0.99)
+        return good[Math.floor(Math.random()*good.length)]
+    else
         return dessertMenu[Math.floor(Math.random() * dessertMenu.length)]
 }
 
@@ -27,7 +32,7 @@ function getTip(dessert: dessert): number {
 export function makeCustomers(amt: number, lvl: number): customer[] {
     const customers: customer[] = []
     for (let i = 0; i < amt; i++) {
-        const want = Math.random() + lvl * 0.1
+        const want = Math.min(Math.random() + lvl * 0.1, 0.95+Math.random()*0.06)
         const item = getCustomerItem(want)
         const tip = getTip(item)
         const temp: customer = { item: item, tippingChance: tip }
