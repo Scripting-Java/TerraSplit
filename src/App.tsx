@@ -37,7 +37,6 @@ function App() {
     return temp
   }
 
-
   const invRef = useRef(inventory)
   function checkStorage(inventory: Record<dessertTypes, number>) {
     const total = invCount(inventory)
