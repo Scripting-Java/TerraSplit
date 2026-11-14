@@ -14,12 +14,10 @@ They can try to buy items you don't have yet, in which case no sale is made.
 Start with a banana farm & a shop
 You can only make banana splits. Every 3 seconds, you make 1 banana split which sells for $7.
 
-Those are just placeholder values
 
-CHANGED THIS ENTIRE SECTION TO FARM UPGRADES.
 ### Level:
-TO LEVEL UP, NOW YOU MUST UNLOCK ALL UPGRADES FOR BUSINESSES IN PREVIOUS LEVELS, AND THEN ALSO SERVE A CERTAIN CUSTOMER THRESHOLD
-When your shop level goes up, you're storage shows up. Upgrades are exponential.
+TO LEVEL UP, NOW YOU MUST UNLOCK ALL UPGRADES FOR PREVIOUS FARMS, AND THEN ALSO SERVE A CERTAIN NUMBER OF CUSTOMERS 
+When your shop level goes up, you're storage goes up.
 
 
 You can also expand to new farms:

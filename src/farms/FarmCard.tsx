@@ -69,7 +69,6 @@ export function FarmCard({ farm, handlePurchase }: FarmCard) {
                                 </summary>
                                 <p>{upgrade.desc}</p>
                                 <p>{moneyFormat(upgrade.cost)}</p>
-                                <p>{upgrade.purchased ? "Purchased" : "Not Purchased"}</p>
                                 <button disabled={upgrade.purchased} className="upgradeButton"onClick={()=>handlePurchase(farm.type,upgrade.name)}>
                                     {upgrade.purchased?"Purchased":"Purchase"}
                                 </button>

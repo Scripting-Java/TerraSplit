@@ -7,3 +7,11 @@ export function moneyFormat(amt: number) {
         maximumFractionDigits:2
     }).format(amt)
 }
+
+export function formatTime(amt:number){
+    return new Intl.NumberFormat("en-US", {
+        notation:"compact",
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+    }).format(amt)
+}
