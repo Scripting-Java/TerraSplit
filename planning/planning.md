@@ -43,11 +43,11 @@ You can also buy more staff(bakers) to produce goods:
 
 
 ## Tipping:
-A random(& tbd) chance to earn 20% extra
+A random chance to earn 20% extra
 
 ## Storage:
 - Depending on your shop level you get storage.
-- You cannot hold more than your storage at a time. This includes all goods.
+- You cannot hold more than your storage at a time. This includes all desserts.
 - So if you only have 20 storage, and you're making 5 desserts a second and your customers will arrive in 5 seconds, you'll lose 5 desserts.
 - If you're production is full, you stop making goods.
 - You start w/ 20 storage slots(20 desserts)
@@ -65,13 +65,14 @@ A random(& tbd) chance to earn 20% extra
 
 
 ### Todo:
-- Farms[X]
-- Implement shop level progression -> Based on #Customers Served+ Money 
+- Implement shop level progression -> Based on #Customers Served + shop level
+- Money [X]
 - Make visuals
-- Create shop frame
+- Create shop frame -> Good enough for now, more for later?
+- Bakers
 
 
-### Farm notes:
+### Farm Mapping:
 "banana" = bananaSplit
 "dairy" = iceCream
 "cocoa" = chocolate

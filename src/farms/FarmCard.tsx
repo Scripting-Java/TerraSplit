@@ -5,7 +5,7 @@ import banana from "../assets/farmIcons/BananaFarm.png"
 import "./FarmCards.css"
 interface FarmCard {
     farm: farm,
-    handlePurchase:(farmType:farmTypes,upgrade:string)=>void,
+    handlePurchase: (farmType: farmTypes, upgrade: string) => void,
 }
 
 function makeFarmTypeNames(farmType: farmTypes): string {
@@ -19,6 +19,8 @@ function makeFarmTypeNames(farmType: farmTypes): string {
         return "Fruits"
     if (farmType === "flourMill")
         return "Wheat"
+    if (farmType === "sugarFarm")
+        return "Sugar"
     return ""
 }
 function makeFarmNames(farmType: farmTypes) {
@@ -32,10 +34,12 @@ function makeFarmNames(farmType: farmTypes) {
         return "Fruit Farm"
     if (farmType === "flourMill")
         return "Wheat Farm"
+    if (farmType === "sugarFarm")
+        return "Sugar Farm"
     return ""
 }
 
-function chooseImg(farmType:farmTypes){
+function chooseImg(farmType: farmTypes) {
     if (farmType === "banana")
         return banana
     if (farmType === "dairy")
@@ -51,12 +55,12 @@ function chooseImg(farmType:farmTypes){
 
 export function FarmCard({ farm, handlePurchase }: FarmCard) {
     return (
-           <div className="farm">
+        <div className="farm">
             <details className="farmDets">
                 <summary className="farmSum">
                     <div>
-                    <h3>{makeFarmNames(farm.type)}</h3>
-                    <p>Produces: {makeFarmTypeNames(farm.type)}</p>
+                        <h3>{makeFarmNames(farm.type)}</h3>
+                        <p>Produces: {makeFarmTypeNames(farm.type)}</p>
                     </div>
                     <img className="logo" src={chooseImg(farm.type)}></img>
                 </summary>
@@ -69,8 +73,8 @@ export function FarmCard({ farm, handlePurchase }: FarmCard) {
                                 </summary>
                                 <p>{upgrade.desc}</p>
                                 <p>{moneyFormat(upgrade.cost)}</p>
-                                <button disabled={upgrade.purchased} className="upgradeButton"onClick={()=>handlePurchase(farm.type,upgrade.name)}>
-                                    {upgrade.purchased?"Purchased":"Purchase"}
+                                <button disabled={upgrade.purchased} className="upgradeButton" onClick={() => handlePurchase(farm.type, upgrade.name)}>
+                                    {upgrade.purchased ? "Purchased" : "Purchase"}
                                 </button>
                             </details>
                         </div>

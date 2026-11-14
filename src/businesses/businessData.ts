@@ -1,5 +1,5 @@
 import { type dessertTypes } from "../desserts/dessert"
-import { bananaFarm, cocoaFarm, dairyFarm, flourMill, fruitFarm, type farm } from "../farms/farm"
+import { bananaFarm, cocoaFarm, dairyFarm, flourMill, fruitFarm, sugarFarm, type farm } from "../farms/farm"
 
 export interface business {
     name: string,
@@ -12,7 +12,7 @@ export interface business {
     farm: farm,
 }
 
-export const bSplitShop:business = {
+export const bSplitShop: business = {
     name: "Banana Split Store",
     dessert: "bSplit",
     cost: 0,
@@ -23,18 +23,18 @@ export const bSplitShop:business = {
     purchased: true
 }
 
-export const iceCream:business = {
+export const iceCream: business = {
     name: "Ice Cream Shop",
     dessert: "iceCream",
-    cost: 500,
-    unlockCost: 750,
+    cost: 1000,
+    unlockCost: 1200,
     levelReq: 1,
     unlocked: false,
     farm: dairyFarm,
     purchased: false
 }
 
-export const chocolate:business = {
+export const chocolate: business = {
     name: "Chocolatier",
     dessert: "chocolate",
     cost: 5000,
@@ -45,28 +45,39 @@ export const chocolate:business = {
     purchased: false
 }
 
-export const tartShop:business = {
+export const tartShop: business = {
     name: "Tart Shop",
     dessert: "tart",
-    cost: 50000,
-    unlockCost: 75000,
+    cost: 75000,
+    unlockCost: 95000,
     levelReq: 3,
     unlocked: false,
     farm: fruitFarm,
     purchased: false
 }
 
-export const pieStore:business = {
+export const pieStore: business = {
     name: "Pie Bakery",
     dessert: "pie",
-    cost: 500000,
-    unlockCost: 750000,
+    cost: 750000,
+    unlockCost: 1000000,
     levelReq: 4,
     unlocked: false,
     farm: flourMill,
     purchased: false
 }
 
-export const businesses: business[] = [bSplitShop, iceCream, chocolate, tartShop, pieStore]
-const names: string[] = businesses.map(bus=>bus.name)
+export const cakeShop: business = {
+    name: "Cake Shop",
+    dessert: "cake",
+    cost: 7500000,
+    unlockCost: 11250000,
+    levelReq: 5,
+    unlocked: false,
+    farm: sugarFarm,
+    purchased: false
+}
+
+export const businesses: business[] = [bSplitShop, iceCream, chocolate, tartShop, pieStore, cakeShop]
+const names: string[] = businesses.map(bus => bus.name)
 export type businessNames = typeof names[number]

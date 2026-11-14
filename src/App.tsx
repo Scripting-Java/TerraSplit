@@ -5,7 +5,6 @@ import './App.css'
 import { sellDessert } from './sell/sellDessert'
 import { businesses, type businessNames } from './businesses/businessData'
 import { unlockBusiness, purchaseBusiness, getAvailableBusinesses } from './businesses/business'
-import { FarmCard } from './farms/FarmCard'
 import { moneyFormat } from './utils/formatter'
 import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms/farm'
 import { BusinessCard } from './businesses/BusinessCard'
@@ -16,7 +15,8 @@ function App() {
     iceCream: 0,
     chocolate: 0,
     tart: 0,
-    pie: 0
+    pie: 0,
+    cake:0
   }
   const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)
@@ -39,13 +39,11 @@ function App() {
 
   //production
   useEffect(() => {
-    const timers = dessertMenu.map(dessert => {
+    const timers = dessertMenu.flatMap(dessert => {
       const shop = shops.find(bus => bus.dessert === dessert.type)
-      let mult
-      if (shop)
-        mult = getFarmMultipliers(shop.farm)
-      else
-        mult = { prod: 1, inc: 1, org: 1 }
+      if (!shop || !shop.purchased)
+        return []
+      const mult = getFarmMultipliers(shop.farm)
       return setInterval(() => {
         setInventory(prev => {
           if (!checkStorage(prev))
@@ -60,6 +58,7 @@ function App() {
       }
     }
   }, [shops])
+
 
   //inventory 
   useEffect(() => {
@@ -79,12 +78,10 @@ function App() {
         const type = dessertMenu[i].type
         const count = invRef.current[type]
         const shop = shops.find(bus => bus.dessert === type)
-        let mult
-        if (shop)
-          mult = getFarmMultipliers(shop.farm)
-        else
-          mult = { prod: 1, inc: 1, org: 1 }
-        const sold = sellDessert(dessertMenu[i].type, cust, count, mult.inc, mult.org-1)
+        if(!shop||!shop.purchased)
+          continue
+        const mult = getFarmMultipliers(shop.farm)
+        const sold = sellDessert(dessertMenu[i].type, cust, count, mult.inc, mult.org - 1)
         const money = sold.money
         const bought = sold.count
         setMoney(prev => prev + money)
@@ -129,7 +126,7 @@ function App() {
         Storage Filled: {invCount(inventory)}/{storage}
       </div>
       <div>
-        {shops.map(shop=>(
+        {shops.map(shop => (
           <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock}></BusinessCard>
         ))}
       </div>

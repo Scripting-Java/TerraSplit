@@ -9,7 +9,7 @@ export interface upgrade {
     income?: number,
     organic?: number
 }
-export type farmTypes = "banana" | "dairy" | "cocoa" | "fruit" | "flourMill"
+export type farmTypes = "banana" | "dairy" | "cocoa" | "fruit" | "flourMill"|"sugarFarm"
 
 export interface farm {
     name: string,
@@ -204,6 +204,57 @@ export const flourMill: farm = {
             organic: 1.2,
             income: 1.15,
             prodSpeed: 0.925
+        }
+    ]
+}
+
+export const sugarFarm: farm = {
+    name: "sugarFarm",
+    type: "sugarFarm",
+    upgrades: [
+        {
+            name: "Sweeter Seeds",
+            cost: 750000,
+            purchased: false,
+            desc: "Higher Grade Sugar Cane. 12% extra income",
+            income: 1.12,
+        },
+        {
+            name: "Cleaner Water",
+            cost: 2000000,
+            purchased: false,
+            desc: "Cleaner Water Makes Your Crops Grow 15% Faster",
+            prodSpeed: 1.15
+        },
+        {
+            name: "No Pesticides",
+            cost: 2500555,
+            purchased: false,
+            desc: "Organic Sugar Gives You A 22% Extra Tipping Chance.",
+            organic: 1.22
+        },
+        {
+            name: "Harvesters",
+            cost: 4055550,
+            purchased: false,
+            desc: "Massive Machines Which Harvest Sugar 30% Faster.",
+            prodSpeed: 1.3
+        },
+        {
+            name: "Irrigation",
+            cost: 5000000,
+            purchased: false,
+            desc: "Irrigation Systems To Grow Sugar 25% Faster",
+            prodSpeed: 1.25
+        },
+        {
+            name: "Milling",
+            cost: 500000,
+            purchased: false,
+            desc: "Refine Your Sugar For A 18% Extra Tipping Chance & 12% Extra Income At The Expense of 9% Slower Production",
+            organic: 1.18,
+            income: 1.12,
+            prodSpeed: 0.91
         }
     ]
 }

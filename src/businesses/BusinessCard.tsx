@@ -24,6 +24,8 @@ function makeDessertNames(des: dessertTypes) {
         return "Tart"
     if (des === "pie")
         return "Pie"
+    if (des === "cake")
+        return "Cake"
 }
 
 function getLogo(des: dessertTypes) {
@@ -49,9 +51,9 @@ export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, 
             <div className="busMain">
                 <img className="busLogo" src={getLogo(business.dessert)}></img>
                 {business.purchased && (
-                        <div className="farmInfo">
-                            <FarmCard farm={business.farm} handlePurchase={handleFarmPurchase}></FarmCard>
-                        </div>
+                    <div className="farmInfo">
+                        <FarmCard farm={business.farm} handlePurchase={handleFarmPurchase}></FarmCard>
+                    </div>
                 )}
                 {!business.unlocked && (
                     <button onClick={() => handleBusUnlock(business.name)}>Unlock For {moneyFormat(business.unlockCost)}</button>
