@@ -9,6 +9,7 @@ import { moneyFormat } from './utils/formatter'
 import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms/farm'
 import { BusinessCard } from './businesses/BusinessCard'
 import { reqs } from './utils/shopLevels'
+import { hireBaker } from './utils/baker'
 
 function App() {
   const [money, setMoney] = useState(0)
@@ -139,11 +140,17 @@ function App() {
     return true
   }
 
+  function handleHireBaker(bus: business){
+    const result = hireBaker(bus,money)
+    setMoney(result.money)
+    setShops(prev=>prev.map(shop=>shop.name === bus.name ? {...shop,bakers:result.bakers}:shop))
+  }
+
   //level
   useEffect(() => {
     if (handleShopLevel(shopLevel, custServed, shops)) {
       setShopLevel(prev => prev + 1)
-      setStorage(prev => prev * 2)
+      setStorage(prev => prev * 4)
     }
   }, [shopLevel, custServed, shops])
 
@@ -155,7 +162,7 @@ function App() {
       <div>
         Storage Filled: {invCount(inventory)}/{storage}
       </div>
-      <div>Storage At Next Level: {storage * 2}</div>
+      <div>Storage At Next Level: {storage * 4}</div>
       <div>
         Shop Level: {shopLevel}
       </div>

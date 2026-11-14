@@ -32,7 +32,7 @@ function getTip(dessert: dessert): number {
 export function makeCustomers(amt: number, lvl: number): customer[] {
     const customers: customer[] = []
     for (let i = 0; i < amt; i++) {
-        const want = Math.min(Math.random() + lvl * 0.1, 0.95+Math.random()*0.06)
+        const want = Math.min(Math.random() + (lvl-1) * 0.1, 0.95+Math.random()*0.06)
         const item = getCustomerItem(want)
         const tip = getTip(item)
         const temp: customer = { item: item, tippingChance: tip }

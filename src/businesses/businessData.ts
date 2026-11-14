@@ -10,6 +10,7 @@ export interface business {
     unlocked: boolean,
     purchased: boolean
     farm: farm,
+    bakers: number,
 }
 
 export const bSplitShop: business = {
@@ -20,7 +21,8 @@ export const bSplitShop: business = {
     levelReq: 0,
     unlocked: true,
     farm: bananaFarm,
-    purchased: true
+    purchased: true,
+    bakers: 1
 }
 
 export const iceCream: business = {
@@ -31,7 +33,8 @@ export const iceCream: business = {
     levelReq: 1,
     unlocked: false,
     farm: dairyFarm,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
 export const chocolate: business = {
@@ -42,7 +45,8 @@ export const chocolate: business = {
     levelReq: 2,
     unlocked: false,
     farm: cocoaFarm,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
 export const tartShop: business = {
@@ -53,7 +57,8 @@ export const tartShop: business = {
     levelReq: 3,
     unlocked: false,
     farm: fruitFarm,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
 export const pieStore: business = {
@@ -64,7 +69,8 @@ export const pieStore: business = {
     levelReq: 4,
     unlocked: false,
     farm: flourMill,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
 export const cakeShop: business = {
@@ -75,29 +81,32 @@ export const cakeShop: business = {
     levelReq: 5,
     unlocked: false,
     farm: sugarFarm,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
-export const cheesecakeShop:business = {
-     name: "Cheesecake Shop",
+export const cheesecakeShop: business = {
+    name: "Cheesecake Shop",
     dessert: "cheesecake",
     cost: 10000000,
-    unlockCost: 125000000,
+    unlockCost: 12500000,
     levelReq: 6,
     unlocked: false,
     farm: cheeseFarm,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
-export const baklavaShop:business = {
-     name: "Baklava Bakery",
+export const baklavaShop: business = {
+    name: "Baklava Bakery",
     dessert: "baklava",
-    cost: 250000000,
-    unlockCost: 1500000000,
+    cost: 25000000,
+    unlockCost: 50000000,
     levelReq: 7,
     unlocked: false,
     farm: pistachioFarm,
-    purchased: false
+    purchased: false,
+    bakers: 1
 }
 
 export const businesses: business[] = [bSplitShop, iceCream, chocolate, tartShop, pieStore, cakeShop, cheesecakeShop, baklavaShop]
