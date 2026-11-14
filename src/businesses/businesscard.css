@@ -1,8 +1,24 @@
-.business{
+.business {
     background-color: #c06f5b;
+    min-width:700px;
+    width:fit-content;
     border: 2px solid rgb(238, 142, 222);
     border-radius: 15px;
-    padding:20px;
-    margin:10px auto;
+    padding: 20px;
+    margin: 10px auto;
     color: #ffffff;
+}
+
+.busMain {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.busLogo {
+    border-radius: 10px;
+    width: 256px;
+    height: 256px;
 }
