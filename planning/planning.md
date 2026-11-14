@@ -66,7 +66,6 @@ A random chance to earn 20% extra
 
 ### Todo:
 - Implement shop level progression -> Based on #Customers Served + shop level
-- Money [X]
 - Make visuals
 - Create shop frame -> Good enough for now, more for later?
 - Bakers
@@ -78,3 +77,12 @@ A random chance to earn 20% extra
 "cocoa" = chocolate
 "fruit" = tart
 "flour mill" = pie
+
+### Adding new business/dessert:
+1. Create dessert under folder in desserts(make it like dessert.ts Ex: cake.ts). Copy paste any existing dessert
+2. Add new dessert type to dessert types in dessert.ts
+3. Add it to dessert menu in dessert.ts
+4. Create its farm by adding to farmtypes and creating it's own farm in farm.ts
+5. Create its business in businessData.ts
+6. Update inventory in App.tsx(invInit -> You get error anyways)
+7. Update shopLevels.ts for the new reqs to get there
