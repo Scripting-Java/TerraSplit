@@ -5,12 +5,15 @@ import { formatTime, moneyFormat } from "../utils/formatter";
 import { FarmCard } from "../farms/FarmCard";
 import { getFarmMultipliers, type farmTypes } from "../farms/farm";
 import bSplit from "../assets/busIcons/BananaSplit.png"
+import { getBakerCost } from "../utils/baker";
 
 interface BusinessCard {
     business: business,
     handleFarmPurchase: (farmType: farmTypes, upgrade: string) => void,
     handleBusPurchase: (name: string) => void,
-    handleBusUnlock: (name: string) => void
+    handleBusUnlock: (name: string) => void,
+    handleHire: (business: business) => void,
+    money: number
 }
 
 function makeDessertNames(des: dessertTypes) {
@@ -33,7 +36,7 @@ function getLogo(des: dessertTypes) {
         return bSplit
 }
 
-export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, handleBusUnlock }: BusinessCard) {
+export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, handleBusUnlock, handleHire, money }: BusinessCard) {
     const dessert = dessertMenu.find(temp => temp.type === business.dessert)
     if (!dessert)
         return null
@@ -46,6 +49,12 @@ export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, 
                     <p>Produces: {makeDessertNames(dessert.type)}</p>
                     <p>Production Time: {formatTime(dessert.prodDur * mult.prod)} seconds</p>
                     <p>Sale Value: {moneyFormat(dessert.prodValue * mult.inc)}</p>
+
+                    <div className="baker">
+                        <p>Bakers: {business.bakers}</p>
+                        <p>Next Baker: {moneyFormat(getBakerCost(business))}</p>
+                    </div>
+                    <button disabled={money<getBakerCost(business)} onClick={()=>handleHire(business)}>Hire Baker</button>
                 </div>
             )}
             <div className="busMain">

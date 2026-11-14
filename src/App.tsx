@@ -4,7 +4,7 @@ import { makeCustomers } from './sell/customer'
 import './App.css'
 import { sellDessert } from './sell/sellDessert'
 import { businesses, type business, type businessNames } from './businesses/businessData'
-import { unlockBusiness, purchaseBusiness, getAvailableBusinesses } from './businesses/business'
+import { unlockBusiness, purchaseBusiness } from './businesses/business'
 import { moneyFormat } from './utils/formatter'
 import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms/farm'
 import { BusinessCard } from './businesses/BusinessCard'
@@ -39,10 +39,6 @@ function App() {
   }
 
   const invRef = useRef(inventory)
-  function checkStorage(inventory: Record<dessertTypes, number>) {
-    const total = invCount(inventory)
-    return total < storage
-  }
 
   //production
   useEffect(() => {
@@ -53,9 +49,11 @@ function App() {
       const mult = getFarmMultipliers(shop.farm)
       return setInterval(() => {
         setInventory(prev => {
-          if (!checkStorage(prev))
+          const remaining = storage-invCount(prev)
+          const amt = Math.min(shop.bakers, remaining)
+          if (amt<=0)
             return prev
-          return { ...prev, [dessert.type]: prev[dessert.type] + 1 }
+          return { ...prev, [dessert.type]: prev[dessert.type] + amt}
         })
       }, dessert.prodDur * 1000 * mult.prod)
     })
@@ -64,8 +62,7 @@ function App() {
         (clearInterval(timers[i]))
       }
     }
-  }, [shops])
-
+  }, [shops, storage])
 
   //inventory 
   useEffect(() => {
@@ -114,10 +111,6 @@ function App() {
     const result = purchaseBusiness(business, shops, money, shopLevel)
     setMoney(result.money)
     setShops(result.businesses)
-  }
-
-  function findBusinesses() {
-    const unlocks = getAvailableBusinesses(shops)
   }
 
   function handleUpgrade(farm: farmTypes, upgrade: string) {
@@ -172,7 +165,7 @@ function App() {
       </div>
       <div>
         {shops.map(shop => (
-          <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock}></BusinessCard>
+          <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock} handleHire={handleHireBaker} money={money}></BusinessCard>
         ))}
       </div>
     </>
