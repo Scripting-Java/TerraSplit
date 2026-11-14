@@ -8,6 +8,7 @@ import { unlockBusiness, purchaseBusiness, getAvailableBusinesses } from './busi
 import { FarmCard } from './farms/FarmCard'
 import { moneyFormat } from './utils/formatter'
 import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms/farm'
+import { BusinessCard } from './businesses/BusinessCard'
 function App() {
   const [money, setMoney] = useState(0)
   const invInit: Record<dessertTypes, number> = {
@@ -128,8 +129,8 @@ function App() {
         Storage Filled: {invCount(inventory)}/{storage}
       </div>
       <div>
-        {shops.map(shop => (
-          <FarmCard key={shop.name} farm={shop.farm} handlePurchase={handleUpgrade}></FarmCard>
+        {shops.map(shop=>(
+          <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock}></BusinessCard>
         ))}
       </div>
     </>
