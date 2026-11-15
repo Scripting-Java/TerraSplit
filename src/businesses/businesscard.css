@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
 .business {
     background-color: #c06f5b;
     min-width: 700px;
@@ -8,9 +9,42 @@
     margin: 10px auto;
     color: #ffffff;
 }
-
+.busName{
+    font-family: 'dosis';
+    font-weight: 582;
+    font-size: 40px;
+    margin:0 auto;
+    padding:15px;
+    background-color: #e29a88;
+    border-radius: 10px;
+    width: fit-content;
+}
+.baker{
+    margin-top:5px;
+    font-family: "dosis";
+    font-weight: 500;
+    font-size:20px;
+}
+.bakerButton{
+    margin-top:2.5px;
+    border-radius: 10px;
+    border:none;
+    font-family: "dosis";
+    font-weight: 500;
+    font-size:20px;
+    color:black;
+    background-color: #e29a88;
+}
 .busMain {
     display: flex;
+    align-items: center;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+.busMain.not {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 25px;
     justify-content: center;
@@ -21,4 +55,14 @@
     border-radius: 10px;
     width: 256px;
     height: 256px;
+}
+
+.busbutton{
+    padding: 12px 16px;
+    border:none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600px;
+    color:black;
+    background-color: rgb(201, 201, 160);
 }

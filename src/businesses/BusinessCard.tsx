@@ -29,11 +29,30 @@ function makeDessertNames(des: dessertTypes) {
         return "Pie"
     if (des === "cake")
         return "Cake"
+    if (des === "baklava")
+        return "Baklava"
+    if (des === "cheesecake")
+        return "Cheesecake"
 }
 
 function getLogo(des: dessertTypes) {
     if (des === "bSplit")
         return bSplit
+    if (des === "iceCream")
+        return "Ice Cream"
+    if (des === "chocolate")
+        return "Chocolate"
+    if (des === "tart")
+        return "Tart"
+    if (des === "pie")
+        return "Pie"
+    if (des === "cake")
+        return "Cake"
+    if (des === "baklava")
+        return "Baklava"
+    if (des === "cheesecake")
+        return "Cheesecake"
+
 }
 
 export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, handleBusUnlock, handleHire, money }: BusinessCard) {
@@ -43,21 +62,28 @@ export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, 
     const mult = getFarmMultipliers(business.farm)
     return (
         <div className="business">
-            <h2>{business.name}</h2>
-            {business.purchased && (
-                <div className="busInfo">
-                    <p>Produces: {makeDessertNames(dessert.type)}</p>
-                    <p>Production Time: {formatTime(dessert.prodDur * mult.prod)} seconds</p>
-                    <p>Sale Value: {moneyFormat(dessert.prodValue * mult.inc)}</p>
-
-                    <div className="baker">
-                        <p>Bakers: {business.bakers}</p>
-                        <p>Next Baker: {moneyFormat(getBakerCost(business))}</p>
+            <details>
+                <summary className="busName">{business.name}</summary>
+                {business.purchased && (
+                    <div className="busInfo">
+                        <details className="baker">
+                            <summary>Info</summary>
+                            <p>Produces: {makeDessertNames(dessert.type)}</p>
+                            <p>Production Time: {formatTime(dessert.prodDur * mult.prod)} seconds</p>
+                            <p>Sale Value: {moneyFormat(dessert.prodValue * mult.inc)}</p>
+                        </details>
+                        <details>
+                            <summary className="baker">Bakers</summary>
+                            <div className="baker">
+                                <p>{business.bakers} {business.bakers > 1 ? ("Bakers") : ("Baker")}</p>
+                                <p>Next Baker: {moneyFormat(getBakerCost(business))}</p>
+                            </div>
+                            <button className="bakerButton" disabled={money < getBakerCost(business)} onClick={() => handleHire(business)}>Hire Baker</button>
+                        </details>
                     </div>
-                    <button disabled={money<getBakerCost(business)} onClick={()=>handleHire(business)}>Hire Baker</button>
-                </div>
-            )}
-            <div className="busMain">
+                )}
+            </details>
+            <div className={`busMain ${!business.purchased ? "not" : ""}`}>
                 <img className="busLogo" src={getLogo(business.dessert)}></img>
                 {business.purchased && (
                     <div className="farmInfo">
@@ -65,10 +91,10 @@ export function BusinessCard({ business, handleFarmPurchase, handleBusPurchase, 
                     </div>
                 )}
                 {!business.unlocked && (
-                    <button onClick={() => handleBusUnlock(business.name)}>Unlock For {moneyFormat(business.unlockCost)}</button>
+                    <button className="busbutton" onClick={() => handleBusUnlock(business.name)}>Unlock For {moneyFormat(business.unlockCost)}</button>
                 )}
                 {business.unlocked && !business.purchased && (
-                    <button onClick={() => handleBusPurchase(business.name)}>Purchase For {moneyFormat(business.cost)}</button>
+                    <button className="busbutton" onClick={() => handleBusPurchase(business.name)}>Purchase For {moneyFormat(business.cost)}</button>
                 )}
             </div>
         </div>

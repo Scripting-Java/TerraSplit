@@ -64,8 +64,8 @@ export const tartShop: business = {
 export const pieStore: business = {
     name: "Pie Bakery",
     dessert: "pie",
-    cost: 750000,
-    unlockCost: 1000000,
+    cost: 730000,
+    unlockCost: 800000,
     levelReq: 4,
     unlocked: false,
     farm: flourMill,
@@ -76,8 +76,8 @@ export const pieStore: business = {
 export const cakeShop: business = {
     name: "Cake Shop",
     dessert: "cake",
-    cost: 7500000,
-    unlockCost: 11250000,
+    cost: 3500000,
+    unlockCost: 5500000,
     levelReq: 5,
     unlocked: false,
     farm: sugarFarm,
