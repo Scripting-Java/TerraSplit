@@ -174,7 +174,8 @@ function App() {
           <p>Shop Level: {shopLevel}</p>
         </div>
       </header>
-
+      
+      <div className='infoPanels'>
       {next ? (
         <div>
           <details className='reqs'>
@@ -192,6 +193,7 @@ function App() {
         <p>Customers Arriving In: {countdown} seconds</p>
         <p>Customers Served Last Cycle: {lastWave}</p>
       </details>
+      </div>
 
       <div className='busGrid'>
         {shops.map(shop => (

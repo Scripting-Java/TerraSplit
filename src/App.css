@@ -50,6 +50,7 @@
   font-weight: 550;
   margin-bottom: 5px;
   margin-top:15px;
+  cursor: pointer;
 }
 
 .reqs p{
@@ -75,4 +76,13 @@ html, body, #root {
   grid-template-columns: repeat(2,1fr);
   gap:25px;
   padding:20px 40px;
+}
+
+.infoPanels{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  gap:25px;
+  margin: 15px auto;
+
 }
