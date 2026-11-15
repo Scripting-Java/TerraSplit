@@ -7,6 +7,8 @@ import { getFarmMultipliers, type farmTypes } from "../farms/farm";
 import bSplit from "../assets/busIcons/BananaSplit.png"
 import { getBakerCost } from "../utils/baker";
 import iceCreamLogo from "../assets/busIcons/IceCream.png"
+import chocolateLogo from "../assets/busIcons/chocolateBar.png"
+import pieLogo from "../assets/busIcons/PumpkinPie.png"
 
 interface BusinessCard {
     business: business,
@@ -42,11 +44,11 @@ function getLogo(des: dessertTypes) {
     if (des === "iceCream")
         return iceCreamLogo
     if (des === "chocolate")
-        return "Chocolate"
+        return chocolateLogo
     if (des === "tart")
         return "Tart"
     if (des === "pie")
-        return "Pie"
+        return pieLogo
     if (des === "cake")
         return "Cake"
     if (des === "baklava")

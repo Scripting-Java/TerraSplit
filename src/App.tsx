@@ -16,7 +16,7 @@ import { makeFarmNames } from './farms/FarmCard'
 import logo from "./assets/TerraSplitLogo.png"
 
 function App() {
-  const [money, setMoney] = useState(10000)
+  const [money, setMoney] = useState(10000000000000)
   const invInit: Record<dessertTypes, number> = {
     bSplit: 0,
     iceCream: 0,
@@ -36,6 +36,10 @@ function App() {
   const nextFarm = farms.find(farm => farm.type === next?.farmType)
   const purchasedUps = nextFarm?.upgrades.filter(up => up.purchased).length
   const totUp = nextFarm?.upgrades.length
+  const nextBusiness = shops.find(bus => bus.levelReq === shopLevel + 1)
+  const [countdown, setCountdown] = useState(0)
+  const [lastWave, setLastWave] = useState(0)
+
   function invCount(inventory: Record<dessertTypes, number>): number {
     let temp = 0
     for (const dessert of dessertMenu) {
@@ -79,11 +83,17 @@ function App() {
   //selling
   useEffect(() => {
     let timer: number
+    let countdown: number
+    function schedule() {
+      const delay = Math.floor(Math.random() * 13 + 12) * 1000
+      setCountdown(delay / 1000)
+      timer = setTimeout(custCycle, delay)
+      countdown = setInterval(() => { setCountdown(prev => prev - 1) }, 1000)
+    }
     function custCycle() {
+      clearInterval(countdown)
       const temp = Math.floor(Math.random() * storage * 0.45 + 0.55 * storage)
       const cust = makeCustomers(temp, shopLevel, shops)
-
-      console.log(cust.length, "customers were made")
       let served = 0
       for (let i = 0; i < dessertMenu.length; i++) {
         const type = dessertMenu[i].type
@@ -98,14 +108,13 @@ function App() {
         const bought = sold.count
         setMoney(prev => prev + money)
         setInventory(prev => ({ ...prev, [type]: prev[type] - bought }))
-        console.log("Sold", bought, type, "for", money)
       }
+      setLastWave(served)
       setCustServed(prev => prev + served)
-      const delay = Math.floor(Math.random() * 13 + 12) * 1000
-      timer = setTimeout(custCycle, delay)
+      schedule()
     }
-    timer = setTimeout(custCycle, Math.floor(Math.random() * 13 + 12) * 1000)
-    return () => clearTimeout(timer)
+    schedule()
+    return () => { clearTimeout(timer), clearInterval(countdown) }
   }, [shops, storage, shopLevel])
 
   function handleBusinessUnlock(business: businessNames) {
@@ -166,16 +175,23 @@ function App() {
         </div>
       </header>
 
-      {next ?(
+      {next ? (
         <div>
           <details className='reqs'>
             <summary>Next Level Requirements</summary>
             <p>Customers Served: {custServed}/{(next.customers)}</p>
             <p>{purchasedUps}/{totUp} Upgrades for {makeFarmNames(nextFarm!.type)}</p>
             <p>Storage At Next Level: {storage * 4}</p>
+            <p>Unlocked Business At Next Level: {nextBusiness?.name ?? "You Own All Businesses"}</p>
           </details>
         </div>
-      ):(<h1 className='reqs'>Max Level</h1>)}
+      ) : (<h1 className='reqs'>Max Level</h1>)}
+
+      <details className='reqs'>
+        <summary>Customer Info</summary>
+        <p>Customers Arriving In: {countdown} seconds</p>
+        <p>Customers Served Last Cycle: {lastWave}</p>
+      </details>
 
       <div className='busGrid'>
         {shops.map(shop => (

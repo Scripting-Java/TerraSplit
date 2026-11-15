@@ -56,6 +56,8 @@
     border-radius: 15px;
     width: 256px;
     height: 256px;
+    margin-top: 5px;
+    background-color: #e29a88;
 }
 
 .busbutton{
@@ -66,4 +68,7 @@
     font-weight: 600px;
     color:black;
     background-color: rgb(201, 201, 160);
+    font-family: 'dosis';
+    font-weight: 700;
+    font-size: 20px;
 }
