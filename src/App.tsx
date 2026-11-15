@@ -10,6 +10,7 @@ import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms
 import { BusinessCard } from './businesses/BusinessCard'
 import { reqs } from './utils/shopLevels'
 import { hireBaker } from './utils/baker'
+import { canProduce } from './utils/storage'
 
 function App() {
   const [money, setMoney] = useState(0)
@@ -20,8 +21,8 @@ function App() {
     tart: 0,
     pie: 0,
     cake: 0,
-    cheesecake:0,
-    baklava:0
+    cheesecake: 0,
+    baklava: 0
   }
   const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)
@@ -49,11 +50,11 @@ function App() {
       const mult = getFarmMultipliers(shop.farm)
       return setInterval(() => {
         setInventory(prev => {
-          const remaining = storage-invCount(prev)
+          const remaining = storage - invCount(prev)
           const amt = Math.min(shop.bakers, remaining)
-          if (amt<=0)
+          if (amt <= 0|| !canProduce(dessert.type,shops,storage,prev))
             return prev
-          return { ...prev, [dessert.type]: prev[dessert.type] + amt}
+          return { ...prev, [dessert.type]: prev[dessert.type] + amt }
         })
       }, dessert.prodDur * 1000 * mult.prod)
     })
@@ -133,10 +134,10 @@ function App() {
     return true
   }
 
-  function handleHireBaker(bus: business){
-    const result = hireBaker(bus,money)
+  function handleHireBaker(bus: business) {
+    const result = hireBaker(bus, money)
     setMoney(result.money)
-    setShops(prev=>prev.map(shop=>shop.name === bus.name ? {...shop,bakers:result.bakers}:shop))
+    setShops(prev => prev.map(shop => shop.name === bus.name ? { ...shop, bakers: result.bakers } : shop))
   }
 
   //level

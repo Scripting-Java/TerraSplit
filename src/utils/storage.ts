@@ -1,10 +1,10 @@
 import type { business } from "../businesses/businessData";
 import type { dessertTypes } from "../desserts/dessert";
 import { dessertMenu } from "../desserts/dessert";
-export function canProduce(dessert:dessertTypes, businesses:business[], storage:number, inv:Record<dessertTypes,number>){
+export function canProduce(dessert:dessertTypes, businesses:business[], storage:number, inv:Record<dessertTypes,number>):boolean{
     const owned = businesses.filter(bus=>bus.purchased)
     if(owned.length===0)
-        return
+        return false
     const ownedDesserts = owned.map(bus=>dessertMenu.find(d=>d.type===bus.dessert)!)
     const tiersOwned = ownedDesserts.map(des=>des.tier)
     let highest = -100
@@ -24,7 +24,7 @@ export function canProduce(dessert:dessertTypes, businesses:business[], storage:
     //need to make production rules
     const des = dessertMenu.find(des=>des.type===dessert)
     if(!des)
-        return
+        return false
     const tier = des.tier
     const allDes = dessertMenu.filter(des=>des.tier===tier).map(des=>des.type)
     
