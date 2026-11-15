@@ -7,6 +7,7 @@ interface shopLevelReq{
 }
 
 export const reqs:shopLevelReq[] = [
+    {level:1, customers:100, farmType:"banana"},
     {level:2,customers:500,farmType:"dairy"},
     {level:3,customers:1500,farmType:"cocoa"},
     {level:4,customers:3750,farmType:"fruit"},

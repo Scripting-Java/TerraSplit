@@ -2,6 +2,7 @@ import { moneyFormat } from "../utils/formatter";
 import type { farm, farmTypes } from "./farm";
 import wheat from "../assets/farmIcons/WheatFarm.png"
 import banana from "../assets/farmIcons/BananaFarm.png"
+import dairy from "../assets/farmIcons/DairyFarm.png"
 import "./FarmCards.css"
 interface FarmCard {
     farm: farm,
@@ -43,7 +44,7 @@ function chooseImg(farmType: farmTypes) {
     if (farmType === "banana")
         return banana
     if (farmType === "dairy")
-        return ""
+        return dairy
     if (farmType === "cocoa")
         return ""
     if (farmType === "fruit")

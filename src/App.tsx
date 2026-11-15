@@ -32,7 +32,7 @@ function App() {
   const [shopLevel, setShopLevel] = useState(1)
   const [shops, setShops] = useState(businesses)
   const [custServed, setCustServed] = useState(0)
-  const next = reqs.find(req => req.level === shopLevel + 1)
+  const next = reqs.find(req => req.level === shopLevel)
   const nextFarm = farms.find(farm => farm.type === next?.farmType)
   const purchasedUps = nextFarm?.upgrades.filter(up => up.purchased).length
   const totUp = nextFarm?.upgrades.length
@@ -56,8 +56,8 @@ function App() {
       return setInterval(() => {
         setInventory(prev => {
           const remaining = storage - invCount(prev)
-          const amt = Math.min(shop.bakers, remaining)
           const allot = Math.floor(prodRatio(shops, dessert.type) * storage)
+          const amt = Math.min(shop.bakers, remaining, allot - prev[dessert.type])
           if (amt <= 0 || !canProduce(dessert.type, shops, storage, prev) || prev[dessert.type] >= allot)
             return prev
           return { ...prev, [dessert.type]: prev[dessert.type] + amt }
@@ -127,7 +127,7 @@ function App() {
   }
 
   function handleShopLevel(shopLevel: number, custServed: number, businesses: business[]): boolean {
-    const next = reqs.find(req => req.level === shopLevel + 1)
+    const next = reqs.find(req => req.level === shopLevel)
     if (!next || custServed < next.customers)
       return false
     const tempBusiness = businesses.find(bus => bus.farm.type === next.farmType)
@@ -166,16 +166,17 @@ function App() {
         </div>
       </header>
 
-      {next && (
+      {next ?(
         <div>
           <details className='reqs'>
             <summary>Next Level Requirements</summary>
-            <p>Customers Served: {custServed}/{next ? (next.customers) : (reqs.find(req => req.level === shopLevel)?.customers)}</p>
+            <p>Customers Served: {custServed}/{(next.customers)}</p>
             <p>{purchasedUps}/{totUp} Upgrades for {makeFarmNames(nextFarm!.type)}</p>
             <p>Storage At Next Level: {storage * 4}</p>
           </details>
         </div>
-      )}
+      ):(<h1 className='reqs'>Max Level</h1>)}
+
       <div className='busGrid'>
         {shops.map(shop => (
           <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock} handleHire={handleHireBaker} money={money}></BusinessCard>
