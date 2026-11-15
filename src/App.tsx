@@ -13,6 +13,7 @@ import { hireBaker } from './utils/baker'
 import { canProduce, prodRatio } from './utils/storage'
 import { farms } from './farms/farm'
 import { makeFarmNames } from './farms/FarmCard'
+import logo from "./assets/TerraSplitLogo.png"
 
 function App() {
   const [money, setMoney] = useState(10000)
@@ -156,7 +157,7 @@ function App() {
   return (
     <>
       <header className='header'>
-        <img className='splitLogo' src=''></img>
+        <img className='splitLogo' src={logo}></img>
         <h1 className='name'>TerraSplit </h1>
         <div className='headerInfo'>
           <p>Money: {moneyFormat(money)}</p>
@@ -175,7 +176,7 @@ function App() {
           </details>
         </div>
       )}
-      <div>
+      <div className='busGrid'>
         {shops.map(shop => (
           <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock} handleHire={handleHireBaker} money={money}></BusinessCard>
         ))}

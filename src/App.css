@@ -8,13 +8,17 @@
   grid-template-columns: 128px 1fr 200px;
   padding: 10px;
   background-color: #c65355;
-
+  position:sticky;
+  top:0;
+  z-index: 100;
   font-family: 'dosis';
 }
 
 .splitLogo {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
+  background-color: #f1a3a9;
+  border-radius: 10px;
 }
 
 .name {
@@ -53,4 +57,22 @@
   padding:8px;
   background-color: #ffe6e6;
   border-radius: 8px;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.busGrid{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:25px;
+  padding:20px 40px;
 }
