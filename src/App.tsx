@@ -75,7 +75,7 @@ function App() {
     let timer: number
     function custCycle() {
       const temp = Math.floor(Math.random() * storage * 0.45 + 0.55 * storage)
-      const cust = makeCustomers(temp, shopLevel)
+      const cust = makeCustomers(temp, shopLevel, shops)
 
       console.log(cust.length, "customers were made")
       let served = 0

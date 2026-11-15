@@ -1,22 +1,26 @@
 import { dessertMenu, type dessert } from "../desserts/dessert"
-
+import { type business } from "../businesses/businessData"
 export interface customer {
     item: dessert,
     tippingChance: number
 }
 
-function getCustomerItem(want: number): dessert {
-    const basic = dessertMenu.filter(temp => temp.tier === 0)
-    const mid = dessertMenu.filter(temp => temp.tier === 1)
-    const good = dessertMenu.filter(temp=>temp.tier==2)
+function getCustomerItem(want: number, shops:business[]): dessert {
+    const ownedBus = shops.filter(bus=>bus.purchased)
+    const ownedDesserts = ownedBus.map(bus=>dessertMenu.find(des=>des.type===bus.dessert)).filter(des=>des!==undefined)
+    const lowest = Math.min(...ownedDesserts.map(des=>des.tier))
+    const basic = ownedDesserts.filter(des=>des.tier===lowest)
+    const highest = Math.max(...ownedDesserts.map(des=>des.tier))
+    const good = ownedDesserts.filter(des=>des.tier===highest)
+    const mid = ownedDesserts.filter(des=>des.tier!==highest && des.tier!==lowest)
     if (want < 0.6)
         return basic[Math.floor(Math.random() * basic.length)]
-    else if (want < 0.85)
-        return mid[Math.floor(Math.random() * mid.length)]
-    else if(want<0.99)
+    else if(want<0.74)
         return good[Math.floor(Math.random()*good.length)]
+    else if (want < 0.99 && mid.length!==0)
+        return mid[Math.floor(Math.random() * mid.length)]
     else
-        return dessertMenu[Math.floor(Math.random() * dessertMenu.length)]
+        return ownedDesserts[Math.floor(Math.random() * ownedDesserts.length)]
 }
 
 function getTip(dessert: dessert): number {
@@ -29,11 +33,11 @@ function getTip(dessert: dessert): number {
         return 0
 }
 
-export function makeCustomers(amt: number, lvl: number): customer[] {
+export function makeCustomers(amt: number, lvl: number, businesses:business[]): customer[] {
     const customers: customer[] = []
     for (let i = 0; i < amt; i++) {
         const want = Math.min(Math.random() + (lvl-1) * 0.1, 0.95+Math.random()*0.06)
-        const item = getCustomerItem(want)
+        const item = getCustomerItem(want, businesses)
         const tip = getTip(item)
         const temp: customer = { item: item, tippingChance: tip }
         customers.push(temp)
