@@ -12,6 +12,7 @@ import { reqs } from './utils/shopLevels'
 import { hireBaker } from './utils/baker'
 import { canProduce, prodRatio } from './utils/storage'
 import { farms } from './farms/farm'
+import { makeFarmNames } from './farms/FarmCard'
 
 function App() {
   const [money, setMoney] = useState(10000)
@@ -32,7 +33,7 @@ function App() {
   const [custServed, setCustServed] = useState(0)
   const next = reqs.find(req => req.level === shopLevel + 1)
   const nextFarm = farms.find(farm => farm.type === next?.farmType)
-  const purchasedUps = nextFarm?.upgrades.filter(up=>up.purchased).length
+  const purchasedUps = nextFarm?.upgrades.filter(up => up.purchased).length
   const totUp = nextFarm?.upgrades.length
   function invCount(inventory: Record<dessertTypes, number>): number {
     let temp = 0
@@ -154,21 +155,24 @@ function App() {
 
   return (
     <>
-      <h1>
-        Money: {moneyFormat(money)}
-      </h1>
-      <div>
-        Storage Filled: {invCount(inventory)}/{storage}
-      </div>
-      <div>Storage At Next Level: {storage * 4}</div>
-      <div>
-        Shop Level: {shopLevel}
-      </div>
+      <header className='header'>
+        <img className='splitLogo' src=''></img>
+        <h1 className='name'>TerraSplit </h1>
+        <div className='headerInfo'>
+          <p>Money: {moneyFormat(money)}</p>
+          <p>Storage Filled: {invCount(inventory)}/{storage}</p>
+          <p>Shop Level: {shopLevel}</p>
+        </div>
+      </header>
+
       {next && (
         <div>
-          <h3>Next Level Requirements</h3>
-          <p>Customers Served: {custServed}/{next ? (next.customers) : (reqs.find(req => req.level === shopLevel)?.customers)}</p>
-          <p>{purchasedUps}/{totUp} Upgrades for {nextFarm!.name}</p>
+          <details className='reqs'>
+            <summary>Next Level Requirements</summary>
+            <p>Customers Served: {custServed}/{next ? (next.customers) : (reqs.find(req => req.level === shopLevel)?.customers)}</p>
+            <p>{purchasedUps}/{totUp} Upgrades for {makeFarmNames(nextFarm!.type)}</p>
+            <p>Storage At Next Level: {storage * 4}</p>
+          </details>
         </div>
       )}
       <div>

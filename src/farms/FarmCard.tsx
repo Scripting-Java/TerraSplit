@@ -23,7 +23,7 @@ function makeFarmTypeNames(farmType: farmTypes): string {
         return "Sugar"
     return ""
 }
-function makeFarmNames(farmType: farmTypes) {
+export function makeFarmNames(farmType: farmTypes) {
     if (farmType === "banana")
         return "Banana Farm"
     if (farmType === "dairy")
@@ -59,7 +59,7 @@ export function FarmCard({ farm, handlePurchase }: FarmCard) {
             <details className="farmDets">
                 <summary className="farmSum">
                     <div>
-                        <h3>{makeFarmNames(farm.type)}</h3>
+                        <h3 className="farmName">{makeFarmNames(farm.type)}</h3>
                         <p>Produces: {makeFarmTypeNames(farm.type)}</p>
                     </div>
                     <img className="logo" src={chooseImg(farm.type)}></img>
@@ -69,10 +69,12 @@ export function FarmCard({ farm, handlePurchase }: FarmCard) {
                         <div key={upgrade.name} className="farmUpgrade">
                             <details>
                                 <summary>
-                                    <h3>{upgrade.name}</h3>
+                                    <h3 className="upgradeName">{upgrade.name}</h3>
                                 </summary>
+                                <div className="upInfo">
                                 <p>{upgrade.desc}</p>
                                 <p>{moneyFormat(upgrade.cost)}</p>
+                                </div>
                                 <button disabled={upgrade.purchased} className="upgradeButton" onClick={() => handlePurchase(farm.type, upgrade.name)}>
                                     {upgrade.purchased ? "Purchased" : "Purchase"}
                                 </button>

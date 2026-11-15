@@ -3,7 +3,7 @@
     background-color: #c06f5b;
     min-width: 700px;
     width: fit-content;
-    border: 2px solid rgb(238, 142, 222);
+    border: 4px solid rgb(248, 110, 92);
     border-radius: 15px;
     padding: 20px;
     margin: 10px auto;
@@ -18,6 +18,7 @@
     background-color: #e29a88;
     border-radius: 10px;
     width: fit-content;
+    cursor: pointer;
 }
 .baker{
     margin-top:5px;
