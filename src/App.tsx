@@ -11,6 +11,7 @@ import { BusinessCard } from './businesses/BusinessCard'
 import { reqs } from './utils/shopLevels'
 import { hireBaker } from './utils/baker'
 import { canProduce, prodRatio } from './utils/storage'
+import { farms } from './farms/farm'
 
 function App() {
   const [money, setMoney] = useState(10000)
@@ -30,7 +31,9 @@ function App() {
   const [shops, setShops] = useState(businesses)
   const [custServed, setCustServed] = useState(0)
   const next = reqs.find(req => req.level === shopLevel + 1)
-
+  const nextFarm = farms.find(farm => farm.type === next?.farmType)
+  const purchasedUps = nextFarm?.upgrades.filter(up=>up.purchased).length
+  const totUp = nextFarm?.upgrades.length
   function invCount(inventory: Record<dessertTypes, number>): number {
     let temp = 0
     for (const dessert of dessertMenu) {
@@ -52,8 +55,8 @@ function App() {
         setInventory(prev => {
           const remaining = storage - invCount(prev)
           const amt = Math.min(shop.bakers, remaining)
-          const allot = Math.floor(prodRatio(shops,dessert.type)*storage)
-          if (amt <= 0|| !canProduce(dessert.type,shops,storage,prev)||prev[dessert.type]>=allot)
+          const allot = Math.floor(prodRatio(shops, dessert.type) * storage)
+          if (amt <= 0 || !canProduce(dessert.type, shops, storage, prev) || prev[dessert.type] >= allot)
             return prev
           return { ...prev, [dessert.type]: prev[dessert.type] + amt }
         })
@@ -161,10 +164,13 @@ function App() {
       <div>
         Shop Level: {shopLevel}
       </div>
-      <div>
-        <h3>Next Level Requirements</h3>
-        <p>Customers Served: {custServed}/{next ? (next.customers) : (reqs.find(req => req.level === shopLevel)?.customers)}</p>
-      </div>
+      {next && (
+        <div>
+          <h3>Next Level Requirements</h3>
+          <p>Customers Served: {custServed}/{next ? (next.customers) : (reqs.find(req => req.level === shopLevel)?.customers)}</p>
+          <p>{purchasedUps}/{totUp} Upgrades for {nextFarm!.name}</p>
+        </div>
+      )}
       <div>
         {shops.map(shop => (
           <BusinessCard key={shop.name} business={shop} handleFarmPurchase={handleUpgrade} handleBusPurchase={handleBusinessPurchase} handleBusUnlock={handleBusinessUnlock} handleHire={handleHireBaker} money={money}></BusinessCard>

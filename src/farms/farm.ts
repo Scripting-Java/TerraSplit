@@ -361,6 +361,7 @@ export const pistachioFarm: farm = {
     ]
 }
 
+export const farms = [bananaFarm,dairyFarm,cocoaFarm,fruitFarm,flourMill,pistachioFarm]
 
 
 export function purchaseFarmUpgrade(farmType: farmTypes, upgradeName: string, businesses: business[], money: number) {
