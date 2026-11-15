@@ -10,10 +10,10 @@ import { getFarmMultipliers, purchaseFarmUpgrade, type farmTypes } from './farms
 import { BusinessCard } from './businesses/BusinessCard'
 import { reqs } from './utils/shopLevels'
 import { hireBaker } from './utils/baker'
-import { canProduce } from './utils/storage'
+import { canProduce, prodRatio } from './utils/storage'
 
 function App() {
-  const [money, setMoney] = useState(0)
+  const [money, setMoney] = useState(10000)
   const invInit: Record<dessertTypes, number> = {
     bSplit: 0,
     iceCream: 0,
@@ -52,7 +52,8 @@ function App() {
         setInventory(prev => {
           const remaining = storage - invCount(prev)
           const amt = Math.min(shop.bakers, remaining)
-          if (amt <= 0|| !canProduce(dessert.type,shops,storage,prev))
+          const allot = Math.floor(prodRatio(shops,dessert.type)*storage)
+          if (amt <= 0|| !canProduce(dessert.type,shops,storage,prev)||prev[dessert.type]>=allot)
             return prev
           return { ...prev, [dessert.type]: prev[dessert.type] + amt }
         })
