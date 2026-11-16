@@ -1,6 +1,7 @@
 import type { business } from "../businesses/businessData";
 import type { dessertTypes } from "../desserts/dessert";
 import { dessertMenu } from "../desserts/dessert";
+
 export function canProduce(dessert: dessertTypes, businesses: business[], storage: number, inv: Record<dessertTypes, number>): boolean {
     const owned = businesses.filter(bus => bus.purchased)
     if (owned.length === 0)

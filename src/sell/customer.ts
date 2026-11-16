@@ -29,6 +29,8 @@ function getTip(dessert: dessert): number {
         return Math.random() * 0.15
     if (tier === 1)
         return Math.random() * 0.25
+    if(tier===2)
+        return Math.random()*0.4
     else
         return 0
 }

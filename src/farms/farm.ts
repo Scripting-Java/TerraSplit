@@ -249,7 +249,7 @@ export const sugarFarm: farm = {
         },
         {
             name: "Milling",
-            cost: 500000,
+            cost: 6100000,
             purchased: false,
             desc: "Refine Your Sugar For A 18% Extra Tipping Chance & 12% Extra Income At The Expense of 9% Slower Production",
             organic: 1.18,
