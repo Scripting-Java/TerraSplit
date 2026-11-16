@@ -9,6 +9,10 @@ import { getBakerCost } from "../utils/baker";
 import iceCreamLogo from "../assets/busIcons/IceCream.png"
 import chocolateLogo from "../assets/busIcons/chocolateBar.png"
 import pieLogo from "../assets/busIcons/PumpkinPie.png"
+import tartLogo from "../assets/busIcons/Tart.png"
+import cakeLogo from "../assets/busIcons/Cake.png"
+import cheeseCakeLogo from "../assets/busIcons/CheeseCake.png"
+import baklavaLogo from '../assets/busIcons/Baklava.png'
 
 interface BusinessCard {
     business: business,
@@ -46,15 +50,15 @@ function getLogo(des: dessertTypes) {
     if (des === "chocolate")
         return chocolateLogo
     if (des === "tart")
-        return "Tart"
+        return tartLogo
     if (des === "pie")
         return pieLogo
     if (des === "cake")
-        return "Cake"
+        return cakeLogo
     if (des === "baklava")
-        return "Baklava"
+        return baklavaLogo
     if (des === "cheesecake")
-        return "Cheesecake"
+        return cheeseCakeLogo
 
 }
 

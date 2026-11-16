@@ -3,6 +3,11 @@ import type { farm, farmTypes } from "./farm";
 import wheat from "../assets/farmIcons/WheatFarm.png"
 import banana from "../assets/farmIcons/BananaFarm.png"
 import dairy from "../assets/farmIcons/DairyFarm.png"
+import cocoa from "../assets/farmIcons/Cocoa.png"
+import fruits from "../assets/farmIcons/fruitFarm.png"
+import sugar from "../assets/farmIcons/SugarFarm.png"
+import cheese from "../assets/farmIcons/CheeseFarm.png"
+import pistachio from "../assets/farmIcons/PistachioFarm.png"
 import "./FarmCards.css"
 interface FarmCard {
     farm: farm,
@@ -22,6 +27,10 @@ function makeFarmTypeNames(farmType: farmTypes): string {
         return "Wheat"
     if (farmType === "sugarFarm")
         return "Sugar"
+    if(farmType==="cheese")
+        return "Cheese"
+    if(farmType==="pistachio")
+        return "Pistachios"
     return ""
 }
 export function makeFarmNames(farmType: farmTypes) {
@@ -37,6 +46,10 @@ export function makeFarmNames(farmType: farmTypes) {
         return "Wheat Farm"
     if (farmType === "sugarFarm")
         return "Sugar Farm"
+    if(farmType==="cheese")
+        return "Cheese Factory"
+    if(farmType==="pistachio")
+        return "Pistachio Farm"
     return ""
 }
 
@@ -46,11 +59,17 @@ function chooseImg(farmType: farmTypes) {
     if (farmType === "dairy")
         return dairy
     if (farmType === "cocoa")
-        return ""
+        return cocoa
     if (farmType === "fruit")
-        return ""
+        return fruits
     if (farmType === "flourMill")
         return wheat
+    if(farmType==="sugarFarm")
+        return sugar
+    if(farmType==="cheese")
+        return cheese
+    if(farmType==="pistachio")
+        return pistachio
     return ""
 }
 

@@ -29,7 +29,7 @@ function App() {
   }
   const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)
-  const [shopLevel, setShopLevel] = useState(1)
+  const [shopLevel, setShopLevel] = useState(8)
   const [shops, setShops] = useState(businesses)
   const [custServed, setCustServed] = useState(0)
   const next = reqs.find(req => req.level === shopLevel)
