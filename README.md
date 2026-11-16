@@ -1,6 +1,6 @@
 # TerraSplit
 Build A Dessert Empire!!!
-Link: 
+Link: https://scripting-java.github.io/TerraSplit/
 
 ## What it's about?
 TerraSplit is an idle game where you get increasingly stronger desserts to make more money and unlock even more desserts! There's a level system, customer system, and baker system!
