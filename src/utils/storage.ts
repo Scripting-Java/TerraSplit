@@ -36,15 +36,15 @@ export function canProduce(dessert: dessertTypes, businesses: business[], storag
 
     //handle easy cases
     if (tier === lowest) {
-        if (current < storage * 0.25)
-            return true
-    }
-    if (tier === highest) {
         if (current < storage * 0.75)
             return true
     }
-    if (tier !== highest && tier !== lowest)
+    if (tier === highest) {
         if (current < storage * 0.45)
+            return true
+    }
+    if (tier !== highest && tier !== lowest)
+        if (current < storage * 0.25)
             return true
     return false
 }

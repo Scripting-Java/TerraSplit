@@ -11,12 +11,11 @@ import { BusinessCard } from './businesses/BusinessCard'
 import { reqs } from './utils/shopLevels'
 import { hireBaker } from './utils/baker'
 import { canProduce, prodRatio } from './utils/storage'
-import { farms } from './farms/farm'
 import { makeFarmNames } from './farms/FarmCard'
 import logo from "./assets/TerraSplitLogo.png"
 
 function App() {
-  const [money, setMoney] = useState(10000000000000)
+  const [money, setMoney] = useState(0)
   const invInit: Record<dessertTypes, number> = {
     bSplit: 0,
     iceCream: 0,
@@ -29,11 +28,11 @@ function App() {
   }
   const [inventory, setInventory] = useState<Record<dessertTypes, number>>(invInit)
   const [storage, setStorage] = useState(20)
-  const [shopLevel, setShopLevel] = useState(8)
+  const [shopLevel, setShopLevel] = useState(1)
   const [shops, setShops] = useState(businesses)
   const [custServed, setCustServed] = useState(0)
   const next = reqs.find(req => req.level === shopLevel)
-  const nextFarm = farms.find(farm => farm.type === next?.farmType)
+  const nextFarm = shops.find(bus => bus.farm.type === next?.farmType)?.farm
   const purchasedUps = nextFarm?.upgrades.filter(up => up.purchased).length
   const totUp = nextFarm?.upgrades.length
   const nextBusiness = shops.find(bus => bus.levelReq === shopLevel + 1)
